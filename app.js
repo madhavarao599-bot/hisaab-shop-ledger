@@ -159,7 +159,8 @@ const STRINGS = {
     totalBalance: 'Total balance',
     todaysBalance: 'Today\'s balance',
     cashReport: 'View cashbook report',
-    entriesCount: '{n} entries'
+    entriesCount: '{n} entries',
+    entriesCountOne: '{n} entry'
   },
   hi: {
     totalOutstanding: 'कुल बकाया',
@@ -290,7 +291,8 @@ const STRINGS = {
     totalBalance: 'कुल बैलेंस',
     todaysBalance: 'आज का बैलेंस',
     cashReport: 'कैशबुक रिपोर्ट देखें',
-    entriesCount: '{n} एंट्री'
+    entriesCount: '{n} एंट्री',
+    entriesCountOne: '{n} एंट्री'
   },
   te: {
     totalOutstanding: 'మొత్తం బాకీ',
@@ -421,7 +423,8 @@ const STRINGS = {
     totalBalance: 'మొత్తం బ్యాలెన్స్',
     todaysBalance: 'ఈరోజు బ్యాలెన్స్',
     cashReport: 'క్యాష్‌బుక్ రిపోర్ట్ చూడండి',
-    entriesCount: '{n} ఎంట్రీలు'
+    entriesCount: '{n} ఎంట్రీలు',
+    entriesCountOne: '{n} ఎంట్రీలు'
   }
 };
 
@@ -730,6 +733,10 @@ function daysAgoText(phone) {
   if (days === 0) return t('todayLabel');
   if (days === 1) return t('yesterdayLabel');
   return t('daysAgo', { n: days });
+}
+
+function entriesCountText(count) {
+  return t(count === 1 ? 'entriesCountOne' : 'entriesCount', { n: count });
 }
 
 function formatTime(timestamp) {
@@ -1439,7 +1446,7 @@ function cashEntryRowsHtml() {
     }
     html += '<div class="cash-day-head">' +
       '<div class="cash-day-date"><strong>' + formatDate(date) + '</strong>' +
-        '<span>' + t('entriesCount', { n: list.length }) + '</span></div>' +
+        '<span>' + entriesCountText(list.length) + '</span></div>' +
       '<div class="cash-day-col out"><span>' + t('cashOutShort') + '</span>' +
         '<strong>' + money(dayOut) + '</strong></div>' +
       '<div class="cash-day-col in"><span>' + t('cashInShort') + '</span>' +
@@ -1810,7 +1817,7 @@ function renderCustomer(customer) {
       '<section class="card ledger-card" id="ledger">' +
         '<div class="ledger-title">' +
           '<h2>' + t('entries') + '</h2>' +
-          '<span class="muted">' + t('entriesCount', { n: entries.length }) + '</span>' +
+          '<span class="muted">' + entriesCountText(entries.length) + '</span>' +
         '</div>' +
         (entries.length
           ? '<div class="ledger-head">' +
