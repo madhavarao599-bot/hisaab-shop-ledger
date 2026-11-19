@@ -27,6 +27,7 @@ const STRINGS = {
   en: {
     totalOutstanding: 'Total outstanding',
     totalAmount: 'Total amount',
+    totalShort: 'Total',
     paidAmount: 'Paid amount',
     pendingAmount: 'Pending amount',
     totalCredit: 'Total credit',
@@ -107,11 +108,34 @@ const STRINGS = {
     imageTooBig: 'Screenshot was too large to save. The entry was saved without it.',
     searchNone: 'No matches',
     creditShort: 'Credit',
-    paymentShort: 'Payment'
+    paymentShort: 'Payment',
+    collection: 'Collection',
+    cashbook: 'Cashbook',
+    collectionMeta: '{n} customers pending',
+    cashInHand: 'Cash in hand',
+    cashIn: 'Cash in',
+    cashOut: 'Cash out',
+    cashInShort: 'In',
+    cashOutShort: 'Out',
+    addCashEntry: 'Add cash entry',
+    cashEntryIn: 'Cash in — money received',
+    cashEntryOut: 'Cash out — money spent',
+    cashAmount: 'Amount (₹)',
+    cashNote: 'Details',
+    cashNotePlaceholder: 'e.g. counter sale, tea, rent, transport',
+    cashEntries: 'Cash entries',
+    all: 'All',
+    noCashEntries: 'No cash entries yet. Add cash in or cash out above.',
+    cashEntryAdded: 'Cash entry added.',
+    cashEntryDeleted: 'Cash entry deleted.',
+    deleteCashConfirm: 'Delete this cash entry?',
+    exportCashCsv: 'Download CSV',
+    cashDayTotal: 'Day total'
   },
   hi: {
     totalOutstanding: 'कुल बकाया',
     totalAmount: 'कुल रकम',
+    totalShort: 'कुल',
     paidAmount: 'जमा रकम',
     pendingAmount: 'बकाया रकम',
     totalCredit: 'कुल उधार',
@@ -192,11 +216,34 @@ const STRINGS = {
     imageTooBig: 'स्क्रीनशॉट बहुत बड़ा था, बिना स्क्रीनशॉट के एंट्री सहेजी गई।',
     searchNone: 'कोई नहीं मिला',
     creditShort: 'उधार',
-    paymentShort: 'भुगतान'
+    paymentShort: 'भुगतान',
+    collection: 'वसूली',
+    cashbook: 'कैशबुक',
+    collectionMeta: '{n} ग्राहकों का बकाया',
+    cashInHand: 'हाथ में नगद',
+    cashIn: 'नगद आया',
+    cashOut: 'नगद गया',
+    cashInShort: 'आया',
+    cashOutShort: 'गया',
+    addCashEntry: 'कैश एंट्री जोड़ें',
+    cashEntryIn: 'नगद आया — पैसे मिले',
+    cashEntryOut: 'नगद गया — खर्च हुआ',
+    cashAmount: 'रकम (₹)',
+    cashNote: 'विवरण',
+    cashNotePlaceholder: 'जैसे दुकान की बिक्री, चाय, किराया, भाड़ा',
+    cashEntries: 'कैश एंट्री',
+    all: 'सभी',
+    noCashEntries: 'अभी कोई कैश एंट्री नहीं। ऊपर नगद आया या गया जोड़ें।',
+    cashEntryAdded: 'कैश एंट्री जोड़ी गई।',
+    cashEntryDeleted: 'कैश एंट्री हटा दी गई।',
+    deleteCashConfirm: 'यह कैश एंट्री हटाएँ?',
+    exportCashCsv: 'CSV डाउनलोड करें',
+    cashDayTotal: 'दिन का कुल'
   },
   te: {
     totalOutstanding: 'మొత్తం బాకీ',
     totalAmount: 'మొత్తం డబ్బు',
+    totalShort: 'మొత్తం',
     paidAmount: 'చెల్లించిన మొత్తం',
     pendingAmount: 'బాకీ మొత్తం',
     totalCredit: 'మొత్తం అప్పు',
@@ -277,7 +324,29 @@ const STRINGS = {
     imageTooBig: 'స్క్రీన్‌షాట్ సేవ్ కాలేదు. ఎంట్రీ దాని లేకుండా సేవ్ అయింది.',
     searchNone: 'ఏమీ లేవు',
     creditShort: 'అప్పు',
-    paymentShort: 'చెల్లింపు'
+    paymentShort: 'చెల్లింపు',
+    collection: 'వసూళ్లు',
+    cashbook: 'క్యాష్‌బుక్',
+    collectionMeta: '{n} కస్టమర్లకు బాకీ',
+    cashInHand: 'చేతిలో నగదు',
+    cashIn: 'నగదు వచ్చింది',
+    cashOut: 'నగదు ఖర్చు',
+    cashInShort: 'వచ్చింది',
+    cashOutShort: 'ఖర్చు',
+    addCashEntry: 'నగదు ఎంట్రీ జోడించండి',
+    cashEntryIn: 'నగదు వచ్చింది — డబ్బు అందింది',
+    cashEntryOut: 'నగదు ఖర్చు — డబ్బు ఇచ్చారు',
+    cashAmount: 'మొత్తం (₹)',
+    cashNote: 'వివరాలు',
+    cashNotePlaceholder: 'ఉదా. కౌంటర్ అమ్మకం, టీ, అద్దె, రవాణా',
+    cashEntries: 'నగదు ఎంట్రీలు',
+    all: 'అన్నీ',
+    noCashEntries: 'ఇంకా నగదు ఎంట్రీలు లేవు. పైన జోడించండి.',
+    cashEntryAdded: 'నగదు ఎంట్రీ జోడించబడింది.',
+    cashEntryDeleted: 'నగదు ఎంట్రీ తొలగించబడింది.',
+    deleteCashConfirm: 'ఈ నగదు ఎంట్రీని తొలగించాలా?',
+    exportCashCsv: 'CSV డౌన్‌లోడ్',
+    cashDayTotal: 'రోజు మొత్తం'
   }
 };
 
@@ -386,6 +455,9 @@ let state = loadState();
 let pendingScreenshot = null;
 let editingId = null;
 let pendingDeleteId = null;
+let pendingCashDeleteId = null;
+let activeTab = 'collection';
+let cashFilter = 'all';
 
 function normalizeState(raw, keepMeta) {
   const shop = typeof raw?.shop === 'string' && raw.shop.trim() ? raw.shop.trim() : 'My shop';
@@ -426,18 +498,58 @@ function normalizeState(raw, keepMeta) {
     entries.push(entry);
   }
 
-  return { shop: shop, upi: upi, lang: lang, customers: customers, entries: entries };
+  const rawCash = Array.isArray(raw?.cashEntries)
+    ? raw.cashEntries
+    : Array.isArray(raw?.cash) ? raw.cash : [];
+  const cashEntries = [];
+  for (const item of rawCash) {
+    let type = String(item?.type == null ? '' : item.type).trim().toLowerCase();
+    if (type === 'income' || type === 'cash-in' || type === 'cashin') type = 'in';
+    if (type === 'expense' || type === 'cash-out' || type === 'cashout') type = 'out';
+    if (type !== 'in' && type !== 'out') continue;
+    const amount = Number(item?.amount);
+    if (!Number.isFinite(amount) || amount <= 0) continue;
+    cashEntries.push({
+      id: keepMeta && item?.id ? String(item.id) : uid(),
+      type: type,
+      amount: round2(amount),
+      date: normalizeDate(item?.date),
+      note: String(item?.note == null ? '' : item.note).trim(),
+      createdAt: keepMeta && Number.isFinite(Number(item?.createdAt))
+        ? Number(item.createdAt) : Date.now()
+    });
+  }
+
+  return {
+    shop: shop,
+    upi: upi,
+    lang: lang,
+    customers: customers,
+    entries: entries,
+    cashEntries: cashEntries
+  };
+}
+
+function emptyState() {
+  return {
+    shop: 'My shop',
+    upi: DEFAULT_UPI,
+    lang: 'en',
+    customers: [],
+    entries: [],
+    cashEntries: []
+  };
 }
 
 function loadState() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return { shop: 'My shop', upi: DEFAULT_UPI, lang: 'en', customers: [], entries: [] };
+    if (!raw) return emptyState();
     const data = normalizeState(JSON.parse(raw), true);
     if (!data.upi) data.upi = DEFAULT_UPI;
     return data;
   } catch (error) {
-    return { shop: 'My shop', upi: DEFAULT_UPI, lang: 'en', customers: [], entries: [] };
+    return emptyState();
   }
 }
 
@@ -488,6 +600,23 @@ function customerTotals(phone) {
     else paid += entry.amount;
   }
   return { credit: round2(credit), paid: round2(paid) };
+}
+
+function cashTotals() {
+  let cashIn = 0;
+  let cashOut = 0;
+  for (const entry of state.cashEntries || []) {
+    if (entry.type === 'in') cashIn += entry.amount;
+    else cashOut += entry.amount;
+  }
+  return { in: round2(cashIn), out: round2(cashOut), balance: round2(cashIn - cashOut) };
+}
+
+function sortedCashEntries() {
+  return (state.cashEntries || []).slice().sort(function (a, b) {
+    if (a.date !== b.date) return a.date < b.date ? 1 : -1;
+    return (b.createdAt || 0) - (a.createdAt || 0);
+  });
 }
 
 function customersWithBalance() {
@@ -747,10 +876,8 @@ function renderDashboard() {
   const credit = creditTotal();
   const paid = paidTotal();
   const pendingCount = customersWithBalance();
-
-  const heroSub = customers.length
-    ? t('heroSub', { pending: pendingCount, total: customers.length })
-    : t('emptyHero');
+  const cash = cashTotals();
+  const cashCount = (state.cashEntries || []).length;
 
   const rows = customers.map(function (customer) {
     const balance = balanceFor(customer.phone);
@@ -802,12 +929,33 @@ function renderDashboard() {
   }).join('');
 
   appEl.innerHTML =
-    '<section class="card hero">' +
-      '<p class="eyebrow">' + t('totalOutstanding') + '</p>' +
-      '<p class="hero-total" id="total-outstanding">' + money(total) +
-        '<span class="sr-only"> (' + plainAmount(total) + ')</span></p>' +
-      '<p class="hero-sub">' + esc(heroSub) + '</p>' +
+    '<section class="book-grid">' +
+      '<button type="button" class="book-card' + (activeTab === 'collection' ? ' active' : '') + '" ' +
+        'data-tab="collection" aria-pressed="' + (activeTab === 'collection') + '">' +
+        '<span class="book-top">' +
+          '<span class="book-icon" aria-hidden="true">₹</span>' +
+          '<span class="book-label">' + t('collection') + '</span>' +
+        '</span>' +
+        '<span class="book-amount" id="total-outstanding">' + money(total) +
+          '<span class="sr-only"> (' + plainAmount(total) + ')</span></span>' +
+        '<span class="book-meta">' +
+          esc(t('totalShort') + ' ' + money(credit) + ' · ' + t('paidLabel') + ' ' + money(paid)) +
+        '</span>' +
+      '</button>' +
+      '<button type="button" class="book-card cash' + (activeTab === 'cashbook' ? ' active' : '') + '" ' +
+        'data-tab="cashbook" aria-pressed="' + (activeTab === 'cashbook') + '">' +
+        '<span class="book-top">' +
+          '<span class="book-icon" aria-hidden="true">▤</span>' +
+          '<span class="book-label">' + t('cashbook') + '</span>' +
+        '</span>' +
+        '<span class="book-amount" id="cash-in-hand">' + money(cash.balance) + '</span>' +
+        '<span class="book-meta">' +
+          esc(t('cashIn') + ' ' + money(cash.in) + ' · ' + t('cashOut') + ' ' + money(cash.out)) +
+        '</span>' +
+      '</button>' +
     '</section>' +
+
+    '<div class="tab-panel" data-panel="collection"' + (activeTab === 'collection' ? '' : ' hidden') + '>' +
 
     '<section class="card stats" aria-label="' + esc(t('totalOutstanding')) + '">' +
       '<div class="stat">' +
@@ -864,6 +1012,76 @@ function renderDashboard() {
       '</form>' +
       '<p class="form-error" id="customerError" role="alert" hidden></p>' +
     '</section>' +
+
+    '</div>' +
+
+    '<div class="tab-panel" data-panel="cashbook"' + (activeTab === 'cashbook' ? '' : ' hidden') + '>' +
+
+    '<section class="card stats cash-stats" aria-label="' + esc(t('cashbook')) + '">' +
+      '<div class="stat">' +
+        '<span class="stat-label">' + t('cashIn') + '</span>' +
+        '<span class="stat-value paid" id="cash-total-in">' + money(cash.in) + '</span>' +
+      '</div>' +
+      '<div class="stat">' +
+        '<span class="stat-label">' + t('cashOut') + '</span>' +
+        '<span class="stat-value due" id="cash-total-out">' + money(cash.out) + '</span>' +
+      '</div>' +
+      '<div class="stat">' +
+        '<span class="stat-label">' + t('cashInHand') + '</span>' +
+        '<span class="stat-value gold" id="cash-balance">' + money(cash.balance) + '</span>' +
+      '</div>' +
+    '</section>' +
+
+    '<section class="card">' +
+      '<h2>' + t('addCashEntry') + '</h2>' +
+      '<form id="cashForm" novalidate>' +
+        '<div class="seg cash-seg" role="radiogroup" aria-label="' + esc(t('addCashEntry')) + '">' +
+          '<label class="seg-opt">' +
+            '<input type="radio" name="cashType" value="in" checked>' +
+            '<span class="cash-in">' + t('cashEntryIn') + '</span>' +
+          '</label>' +
+          '<label class="seg-opt">' +
+            '<input type="radio" name="cashType" value="out">' +
+            '<span class="cash-out">' + t('cashEntryOut') + '</span>' +
+          '</label>' +
+        '</div>' +
+        '<div class="grid2">' +
+          '<div class="field">' +
+            '<label for="cashAmount">' + t('cashAmount') + '</label>' +
+            '<input id="cashAmount" name="amount" type="number" inputmode="decimal" min="1" step="0.01" ' +
+              'placeholder="0" required>' +
+          '</div>' +
+          '<div class="field">' +
+            '<label for="cashDate">' + t('date') + '</label>' +
+            '<input id="cashDate" name="date" type="date" value="' + todayISO() + '" required>' +
+          '</div>' +
+        '</div>' +
+        '<div class="field" style="margin-top:12px">' +
+          '<label for="cashNote">' + t('cashNote') + ' <span class="optional">' + t('optional') + '</span></label>' +
+          '<input id="cashNote" name="note" type="text" maxlength="140" ' +
+            'placeholder="' + esc(t('cashNotePlaceholder')) + '">' +
+        '</div>' +
+        '<p class="form-error" id="cashError" role="alert" hidden></p>' +
+        '<button class="btn gold-btn wide" type="submit">' + t('addCashEntry') + '</button>' +
+      '</form>' +
+    '</section>' +
+
+    '<section class="card">' +
+      '<div class="list-head">' +
+        '<h2>' + t('cashEntries') + ' <span class="count-pill gold">' + cashCount + '</span></h2>' +
+        '<button type="button" class="btn ghost small" id="cash-export">' + t('exportCashCsv') + '</button>' +
+      '</div>' +
+      '<div class="chips">' +
+        ['all', 'in', 'out'].map(function (key) {
+          const label = key === 'all' ? t('all') : key === 'in' ? t('cashInShort') : t('cashOutShort');
+          return '<button type="button" class="chip' + (cashFilter === key ? ' active' : '') + '" ' +
+            'data-cash-filter="' + key + '">' + label + '</button>';
+        }).join('') +
+      '</div>' +
+      cashEntryRowsHtml() +
+    '</section>' +
+
+    '</div>' +
 
     '<details class="card settings-card">' +
       '<summary>' + t('settings') + '</summary>' +
@@ -947,6 +1165,27 @@ function renderDashboard() {
 
   document.getElementById('export-csv').addEventListener('click', exportCsv);
 
+  document.querySelectorAll('[data-tab]').forEach(function (button) {
+    button.addEventListener('click', function () {
+      activateTab(button.getAttribute('data-tab'));
+    });
+  });
+
+  document.querySelectorAll('[data-cash-filter]').forEach(function (button) {
+    button.addEventListener('click', function () {
+      cashFilter = button.getAttribute('data-cash-filter') || 'all';
+      renderDashboard();
+    });
+  });
+
+  const cashForm = document.getElementById('cashForm');
+  cashForm.addEventListener('submit', function (event) {
+    event.preventDefault();
+    addCashEntry(cashForm);
+  });
+
+  document.getElementById('cash-export').addEventListener('click', exportCashCsv);
+
   const settingsForm = document.getElementById('settingsForm');
   settingsForm.addEventListener('submit', function (event) {
     event.preventDefault();
@@ -958,6 +1197,129 @@ function renderDashboard() {
     render();
     toast(t('saved'));
   });
+}
+
+function activateTab(name) {
+  if (name !== 'collection' && name !== 'cashbook') return;
+  activeTab = name;
+  document.querySelectorAll('[data-tab]').forEach(function (button) {
+    const on = button.getAttribute('data-tab') === name;
+    button.classList.toggle('active', on);
+    button.setAttribute('aria-pressed', String(on));
+  });
+  document.querySelectorAll('[data-panel]').forEach(function (panel) {
+    panel.hidden = panel.getAttribute('data-panel') !== name;
+  });
+}
+
+function cashEntryRowsHtml() {
+  const entries = sortedCashEntries().filter(function (entry) {
+    return cashFilter === 'all' || entry.type === cashFilter;
+  });
+  if (!entries.length) return '<p class="empty">' + t('noCashEntries') + '</p>';
+
+  const groups = new Map();
+  for (const entry of entries) {
+    if (!groups.has(entry.date)) groups.set(entry.date, []);
+    groups.get(entry.date).push(entry);
+  }
+
+  let html = '<div class="cash-list">';
+  groups.forEach(function (list, date) {
+    let net = 0;
+    for (const entry of list) net += entry.type === 'in' ? entry.amount : -entry.amount;
+    net = round2(net);
+    html += '<div class="cash-day">' +
+      '<span>' + formatDate(date) + '</span>' +
+      '<span class="cash-day-net ' + (net > 0 ? 'in' : net < 0 ? 'out' : 'zero') + '">' +
+        (net > 0 ? '+' : '') + money(net) +
+      '</span>' +
+    '</div>';
+
+    for (const entry of list) {
+      if (pendingCashDeleteId === entry.id) {
+        html += '<div class="cash-row cash-confirm">' +
+          '<span class="confirm-text">' + t('deleteCashConfirm') + '</span>' +
+          '<button type="button" class="link-btn danger" data-cash-delete-confirm="' +
+            esc(entry.id) + '">' + t('confirmDeleteBtn') + '</button>' +
+          '<button type="button" class="link-btn" data-cash-cancel="1">' + t('cancel') + '</button>' +
+        '</div>';
+        continue;
+      }
+      const isIn = entry.type === 'in';
+      const title = entry.note || (isIn ? t('cashIn') : t('cashOut'));
+      html += '<div class="cash-row">' +
+        '<span class="cash-badge ' + entry.type + '">' +
+          (isIn ? t('cashInShort') : t('cashOutShort')) + '</span>' +
+        '<div class="cash-main">' +
+          '<span class="cash-note">' + esc(title) + '</span>' +
+          '<span class="cash-meta">' + formatDate(entry.date) + ' · ' +
+            '<button type="button" class="link-btn tiny danger" data-cash-delete="' +
+              esc(entry.id) + '">' + t('delete') + '</button>' +
+          '</span>' +
+        '</div>' +
+        '<span class="cash-amount ' + entry.type + '">' +
+          (isIn ? '+' : '\u2212') + money(entry.amount) + '</span>' +
+      '</div>';
+    }
+  });
+  html += '</div>';
+  return html;
+}
+
+function addCashEntry(form) {
+  const errorEl = document.getElementById('cashError');
+  const type = form.querySelector('input[name="cashType"]:checked').value;
+  const amount = Number(form.elements.amount.value);
+  const date = form.elements.date.value || todayISO();
+  const note = form.elements.note.value.trim();
+
+  function fail(message) {
+    errorEl.textContent = message;
+    errorEl.hidden = false;
+  }
+
+  if (!Number.isFinite(amount) || amount <= 0) return fail(t('errAmount'));
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return fail(t('errDate'));
+
+  if (!Array.isArray(state.cashEntries)) state.cashEntries = [];
+  state.cashEntries.push({
+    id: uid(),
+    type: type === 'out' ? 'out' : 'in',
+    amount: round2(amount),
+    date: date,
+    note: note,
+    createdAt: Date.now()
+  });
+
+  if (!persist()) toast(t('storageFull'));
+  render();
+  toast(t('cashEntryAdded'));
+}
+
+function exportCashCsv() {
+  const rows = sortedCashEntries().slice().sort(function (a, b) {
+    if (a.date !== b.date) return a.date < b.date ? -1 : 1;
+    return (a.createdAt || 0) - (b.createdAt || 0);
+  }).map(function (entry) {
+    return [entry.date, entry.type, entry.amount, entry.note];
+  });
+
+  const lines = [['Date', 'Type', 'Amount', 'Details']].concat(rows);
+  const csv = '\uFEFF' + lines.map(function (row) {
+    return row.map(csvCell).join(',');
+  }).join('\r\n');
+
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  const slug = state.shop.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'shop';
+  link.href = url;
+  link.download = slug + '-cashbook-' + todayISO() + '.csv';
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  setTimeout(function () { URL.revokeObjectURL(url); }, 2000);
 }
 
 function addCustomer(form) {
@@ -1014,6 +1376,9 @@ function importText(text, fileName) {
   pendingScreenshot = null;
   editingId = null;
   pendingDeleteId = null;
+  pendingCashDeleteId = null;
+  activeTab = 'collection';
+  cashFilter = 'all';
 
   if (location.hash && location.hash !== '#/') {
     location.hash = '#/';
@@ -1427,6 +1792,30 @@ appEl.addEventListener('click', function (event) {
     return;
   }
 
+  const cashDel = event.target.closest('[data-cash-delete]');
+  if (cashDel) {
+    pendingCashDeleteId = cashDel.getAttribute('data-cash-delete');
+    render();
+    return;
+  }
+
+  const cashDelConfirm = event.target.closest('[data-cash-delete-confirm]');
+  if (cashDelConfirm) {
+    const id = cashDelConfirm.getAttribute('data-cash-delete-confirm');
+    state.cashEntries = (state.cashEntries || []).filter(function (item) { return item.id !== id; });
+    pendingCashDeleteId = null;
+    if (!persist()) toast(t('storageFull'));
+    render();
+    toast(t('cashEntryDeleted'));
+    return;
+  }
+
+  if (event.target.closest('[data-cash-cancel]')) {
+    pendingCashDeleteId = null;
+    render();
+    return;
+  }
+
   if (event.target.closest('[data-cancel-edit]')) {
     editingId = null;
     render();
@@ -1442,6 +1831,7 @@ langSelect.addEventListener('change', function () {
 window.addEventListener('hashchange', function () {
   editingId = null;
   pendingDeleteId = null;
+  pendingCashDeleteId = null;
   pendingScreenshot = null;
   render();
 });

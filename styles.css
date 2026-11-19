@@ -11,6 +11,13 @@
   --green-soft: #e6f2ea;
   --red: #ab4430;
   --red-soft: #fbeae5;
+  --gold: #a97b1f;
+  --gold-deep: #7c5710;
+  --gold-soft: #fbf4e3;
+  --gold-line: #ead9ae;
+  --gold-grad-1: #b8862b;
+  --gold-grad-2: #8f6412;
+  --gold-contrast: #ffffff;
   --shadow: 0 1px 2px rgba(28, 36, 30, .05), 0 14px 34px -26px rgba(28, 36, 30, .45);
   --radius: 16px;
   --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", Arial, sans-serif;
@@ -185,6 +192,242 @@ h2 .muted { font-weight: 500; }
   color: #c5e0d1;
   font-size: .9rem;
 }
+
+/* ---------- collection / cashbook cards ---------- */
+
+.book-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 13px;
+  margin-top: 22px;
+}
+
+.book-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  padding: 16px;
+  text-align: left;
+  font: inherit;
+  color: var(--ink);
+  border: 1px solid var(--gold-line);
+  border-radius: 18px;
+  background: linear-gradient(160deg, var(--card) 0%, var(--gold-soft) 100%);
+  box-shadow: 0 1px 2px rgba(90, 66, 20, .06), 0 18px 34px -28px rgba(122, 88, 24, .5);
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform .12s, box-shadow .15s, border-color .15s;
+}
+
+.book-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: linear-gradient(90deg, #e3c98d, var(--gold-grad-1));
+  opacity: .8;
+}
+
+.book-card:hover {
+  transform: translateY(-1px);
+  border-color: var(--gold);
+}
+
+.book-card.active {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--gold) 26%, transparent),
+    0 18px 34px -26px rgba(122, 88, 24, .55);
+}
+
+.book-top {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+}
+
+.book-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--gold) 16%, var(--card));
+  color: var(--gold-deep);
+  font-size: .98rem;
+  font-weight: 700;
+}
+
+.book-label {
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.book-amount {
+  display: block;
+  margin-top: 5px;
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -.03em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.book-meta {
+  font-size: .72rem;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+.tab-panel[hidden] { display: none; }
+
+.stat-value.gold { color: var(--gold-deep); }
+
+.btn.gold-btn {
+  background: linear-gradient(135deg, var(--gold-grad-1), var(--gold-grad-2));
+  color: var(--gold-contrast);
+  border-color: transparent;
+}
+
+.btn.gold-btn:hover { filter: brightness(.94); }
+
+.count-pill.gold { background: var(--gold-soft); color: var(--gold-deep); }
+
+/* ---------- cashbook ---------- */
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0 8px;
+}
+
+.chip {
+  padding: 7px 14px;
+  border: 1px solid var(--gold-line);
+  border-radius: 999px;
+  background: var(--gold-soft);
+  color: var(--gold-deep);
+  font: inherit;
+  font-size: .78rem;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.chip:hover { border-color: var(--gold); }
+
+.chip.active {
+  background: linear-gradient(135deg, var(--gold-grad-1), var(--gold-grad-2));
+  border-color: transparent;
+  color: var(--gold-contrast);
+}
+
+.cash-day {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 4px 6px;
+  border-bottom: 1px solid var(--line);
+  font-size: .76rem;
+  font-weight: 650;
+  color: var(--muted);
+}
+
+.cash-day-net { font-variant-numeric: tabular-nums; font-weight: 700; }
+.cash-day-net.in { color: var(--green); }
+.cash-day-net.out { color: var(--red); }
+.cash-day-net.zero { color: var(--muted); }
+
+.cash-row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 4px;
+  border-bottom: 1px solid var(--line);
+}
+
+.cash-row:last-child { border-bottom: 0; }
+
+.cash-badge {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  font-size: .68rem;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.1;
+  padding: 2px;
+}
+
+.cash-badge.in { background: var(--green-soft); color: var(--green-dark); }
+.cash-badge.out { background: var(--red-soft); color: var(--red); }
+
+.cash-main { display: flex; flex-direction: column; min-width: 0; }
+
+.cash-note {
+  font-size: .9rem;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cash-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2px;
+  font-size: .74rem;
+  color: var(--muted);
+}
+
+.link-btn.tiny {
+  min-height: 0;
+  padding: 0;
+  margin-left: 6px;
+  font-size: .72rem;
+  font-weight: 600;
+}
+
+.cash-amount {
+  font-size: .92rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.cash-amount.in { color: var(--green); }
+.cash-amount.out { color: var(--red); }
+
+.cash-row.cash-confirm {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin: 6px 0;
+  padding: 10px 12px;
+  border-bottom: 0;
+  border-radius: 10px;
+  background: var(--red-soft);
+}
+
+.cash-seg .seg-opt input:checked + span.cash-in { color: var(--green); }
+.cash-seg .seg-opt input:checked + span.cash-out { color: var(--red); }
 
 /* ---------- shop totals row ---------- */
 
@@ -949,6 +1192,14 @@ textarea#import-box {
   .shop-name { display: none; }
   .entry { gap: 6px 10px; }
   .shot-btn { width: 58px; height: 58px; }
+  .book-grid { gap: 9px; }
+  .book-card { padding: 12px; border-radius: 15px; }
+  .book-icon { width: 26px; height: 26px; font-size: .82rem; border-radius: 8px; }
+  .book-label { font-size: .64rem; letter-spacing: .07em; }
+  .book-amount { font-size: 1.12rem; }
+  .book-meta { font-size: .65rem; }
+  .cash-badge { width: 32px; height: 32px; font-size: .64rem; }
+  .cash-note { font-size: .86rem; }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -964,6 +1215,11 @@ textarea#import-box {
     --green-soft: #1d2c23;
     --red: #e28470;
     --red-soft: #32211d;
+    --gold: #d8b25f;
+    --gold-deep: #e8cb87;
+    --gold-soft: #241f12;
+    --gold-line: #493b1e;
+    --gold-contrast: #171207;
     --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 14px 34px -26px rgba(0, 0, 0, .8);
   }
 
