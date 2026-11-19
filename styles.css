@@ -101,7 +101,6 @@ a { color: var(--green); }
 }
 
 .lang-select {
-  appearance: none;
   border: 1px solid var(--line);
   border-radius: 9px;
   background: var(--card);
@@ -109,7 +108,7 @@ a { color: var(--green); }
   font: inherit;
   font-size: .78rem;
   font-weight: 650;
-  padding: 6px 8px;
+  padding: 6px 4px;
   cursor: pointer;
 }
 
