@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Hisaab — a simple digital ledger for your shop.">
+<meta name="theme-color" content="#146c46">
+<title>Hisaab — shop ledger</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="#/"><span class="brand-mark">₹</span>Hisaab</a>
+    <div class="topbar-right">
+      <span class="shop-name" id="shopName"></span>
+      <select class="lang-select" id="langSelect" aria-label="Language">
+        <option value="en">EN</option>
+        <option value="hi">हिं</option>
+        <option value="te">తె</option>
+      </select>
+    </div>
+  </div>
+</header>
+
+<main class="wrap" id="app"></main>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<div class="lightbox" id="lightbox" hidden>
+  <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Close image">&times;</button>
+  <img id="lightboxImg" alt="Payment screenshot">
+</div>
+
+<noscript><p class="wrap">Hisaab needs JavaScript enabled.</p></noscript>
+
+<script src="app.js"></script>
+</body>
+</html>
