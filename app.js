@@ -26,6 +26,12 @@ const WA_ICON =
 const STRINGS = {
   en: {
     totalOutstanding: 'Total outstanding',
+    totalAmount: 'Total amount',
+    paidAmount: 'Paid amount',
+    pendingAmount: 'Pending amount',
+    totalCredit: 'Total credit',
+    paidLabel: 'Paid',
+    pendingLabel: 'Pending',
     heroSub: '{pending} of {total} customers have a pending balance',
     emptyHero: 'Add your first customer below, or import a shop file.',
     addCustomer: 'Add customer',
@@ -105,6 +111,12 @@ const STRINGS = {
   },
   hi: {
     totalOutstanding: 'कुल बकाया',
+    totalAmount: 'कुल रकम',
+    paidAmount: 'जमा रकम',
+    pendingAmount: 'बकाया रकम',
+    totalCredit: 'कुल उधार',
+    paidLabel: 'जमा',
+    pendingLabel: 'बकाया',
     heroSub: '{total} में से {pending} ग्राहकों का बकाया है',
     emptyHero: 'नीचे पहला ग्राहक जोड़ें, या दुकान की फ़ाइल इंपोर्ट करें।',
     addCustomer: 'ग्राहक जोड़ें',
@@ -184,6 +196,12 @@ const STRINGS = {
   },
   te: {
     totalOutstanding: 'మొత్తం బాకీ',
+    totalAmount: 'మొత్తం డబ్బు',
+    paidAmount: 'చెల్లించిన మొత్తం',
+    pendingAmount: 'బాకీ మొత్తం',
+    totalCredit: 'మొత్తం అప్పు',
+    paidLabel: 'చెల్లించినది',
+    pendingLabel: 'బాకీ',
     heroSub: '{total} కస్టమర్లలో {pending} మందికి బాకీ ఉంది',
     emptyHero: 'క్రింద మొదటి కస్టమర్ను జోడించండి, లేదా షాప్ ఫైల్ను ఇంపోర్ట్ చేయండి.',
     addCustomer: 'కస్టమర్ జోడించండి',
@@ -449,6 +467,29 @@ function totalOutstanding() {
   return round2(total);
 }
 
+function creditTotal() {
+  let total = 0;
+  for (const entry of state.entries) if (entry.type === 'credit') total += entry.amount;
+  return round2(total);
+}
+
+function paidTotal() {
+  let total = 0;
+  for (const entry of state.entries) if (entry.type === 'payment') total += entry.amount;
+  return round2(total);
+}
+
+function customerTotals(phone) {
+  let credit = 0;
+  let paid = 0;
+  for (const entry of state.entries) {
+    if (entry.phone !== phone) continue;
+    if (entry.type === 'credit') credit += entry.amount;
+    else paid += entry.amount;
+  }
+  return { credit: round2(credit), paid: round2(paid) };
+}
+
 function customersWithBalance() {
   return state.customers.filter(function (customer) { return balanceFor(customer.phone) > 0; }).length;
 }
@@ -703,6 +744,8 @@ function setImportStatus(message, isError) {
 function renderDashboard() {
   const customers = sortedCustomers();
   const total = totalOutstanding();
+  const credit = creditTotal();
+  const paid = paidTotal();
   const pendingCount = customersWithBalance();
 
   const heroSub = customers.length
@@ -766,6 +809,21 @@ function renderDashboard() {
       '<p class="hero-sub">' + esc(heroSub) + '</p>' +
     '</section>' +
 
+    '<section class="card stats" aria-label="' + esc(t('totalOutstanding')) + '">' +
+      '<div class="stat">' +
+        '<span class="stat-label">' + t('totalAmount') + '</span>' +
+        '<span class="stat-value" id="total-amount">' + money(credit) + '</span>' +
+      '</div>' +
+      '<div class="stat">' +
+        '<span class="stat-label">' + t('paidAmount') + '</span>' +
+        '<span class="stat-value paid" id="paid-amount">' + money(paid) + '</span>' +
+      '</div>' +
+      '<div class="stat">' +
+        '<span class="stat-label">' + t('pendingAmount') + '</span>' +
+        '<span class="stat-value due" id="pending-amount">' + money(total) + '</span>' +
+      '</div>' +
+    '</section>' +
+
     '<section class="card list-card">' +
       '<div class="list-head">' +
         '<h2>' + t('customers') + ' <span class="count-pill">' + customers.length + '</span></h2>' +
@@ -800,7 +858,7 @@ function renderDashboard() {
         '<div class="field">' +
           '<label for="custPhone">' + t('phone') + '</label>' +
           '<input id="custPhone" name="phone" type="tel" inputmode="numeric" autocomplete="off" ' +
-            'maxlength="14" placeholder="' + esc(t('phonePlaceholder')) + '" required>' +
+            'maxlength="10" pattern="[0-9]{10}" placeholder="' + esc(t('phonePlaceholder')) + '" required>' +
         '</div>' +
         '<button class="btn primary" type="submit">' + t('add') + '</button>' +
       '</form>' +
@@ -842,6 +900,12 @@ function renderDashboard() {
   form.addEventListener('submit', function (event) {
     event.preventDefault();
     addCustomer(form);
+  });
+
+  const phoneInput = document.getElementById('custPhone');
+  phoneInput.addEventListener('input', function () {
+    const digits = phoneInput.value.replace(/\D/g, '').slice(0, 10);
+    if (phoneInput.value !== digits) phoneInput.value = digits;
   });
 
   const search = document.getElementById('search');
@@ -899,7 +963,7 @@ function renderDashboard() {
 function addCustomer(form) {
   const errorEl = document.getElementById('customerError');
   const name = form.elements.name.value.trim().replace(/\s+/g, ' ');
-  const phone = normalizePhone(form.elements.phone.value);
+  const phone = form.elements.phone.value.replace(/\D/g, '');
 
   function fail(message) {
     errorEl.textContent = message;
@@ -1103,6 +1167,7 @@ function entryHtml(entry) {
 function renderCustomer(customer) {
   const balance = balanceFor(customer.phone);
   const balanceCls = balance > 0 ? 'due' : balance < 0 ? 'advance' : 'zero';
+  const totals = customerTotals(customer.phone);
   const entries = sortedEntries(customer.phone);
 
   appEl.innerHTML =
@@ -1123,6 +1188,20 @@ function renderCustomer(customer) {
       '<a class="wa-btn solid" href="' + esc(waLink(customer)) + '" target="_blank" rel="noopener">' +
         WA_ICON + '<span>' + t('whatsapp') + '</span>' +
       '</a>' +
+      '<div class="cust-stats">' +
+        '<div class="cust-stat">' +
+          '<span>' + t('totalCredit') + '</span>' +
+          '<strong>' + money(totals.credit) + '</strong>' +
+        '</div>' +
+        '<div class="cust-stat">' +
+          '<span>' + t('paidLabel') + '</span>' +
+          '<strong class="advance">' + money(totals.paid) + '</strong>' +
+        '</div>' +
+        '<div class="cust-stat">' +
+          '<span>' + t('pendingLabel') + '</span>' +
+          '<strong class="' + balanceCls + '">' + money(balance) + '</strong>' +
+        '</div>' +
+      '</div>' +
     '</section>' +
 
     '<section class="card">' +

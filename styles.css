@@ -186,6 +186,88 @@ h2 .muted { font-weight: 500; }
   font-size: .9rem;
 }
 
+/* ---------- shop totals row ---------- */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 0;
+  overflow: hidden;
+}
+
+.stat {
+  min-width: 0;
+  padding: 14px 14px 15px;
+  border-left: 1px solid var(--line);
+}
+
+.stat:first-child { border-left: 0; }
+
+.stat-label {
+  display: block;
+  margin-bottom: 3px;
+  font-size: .68rem;
+  font-weight: 650;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.stat-value {
+  display: block;
+  font-size: 1.02rem;
+  font-weight: 750;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -.015em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.stat-value.paid { color: var(--green); }
+.stat-value.due { color: var(--red); }
+
+/* ---------- customer totals ---------- */
+
+.cust-stats {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 2px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+.cust-stat {
+  min-width: 0;
+  padding: 0 12px;
+  border-left: 1px solid var(--line);
+}
+
+.cust-stat:first-child { border-left: 0; padding-left: 0; }
+
+.cust-stat span {
+  display: block;
+  margin-bottom: 2px;
+  font-size: .7rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.cust-stat strong {
+  display: block;
+  font-size: .98rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -.01em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cust-stat strong.advance { color: var(--green); }
+.cust-stat strong.due { color: var(--red); }
+.cust-stat strong.zero { color: var(--muted); }
+
 /* ---------- forms ---------- */
 
 .field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
@@ -852,6 +934,12 @@ textarea#import-box {
   .hero { padding: 20px; }
   .settings-form .btn { align-self: stretch; }
   .list-head .btn.small { padding: 7px 9px; }
+  .stat { padding: 12px 10px; }
+  .stat-label { font-size: .61rem; letter-spacing: .03em; min-height: 3em; }
+  .stat-value { font-size: .95rem; }
+  .cust-stat { padding: 0 8px; }
+  .cust-stat span { font-size: .66rem; }
+  .cust-stat strong { font-size: .92rem; }
 }
 
 @media (max-width: 420px) {
