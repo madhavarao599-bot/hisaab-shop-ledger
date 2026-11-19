@@ -12,9 +12,15 @@ const TESSERACT_URL = 'https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesserac
 const appEl = document.getElementById('app');
 const shopNameEl = document.getElementById('shopName');
 const langSelect = document.getElementById('langSelect');
+const mainTabs = document.getElementById('mainTabs');
 const toastEl = document.getElementById('toast');
 const lightboxEl = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightboxImg');
+
+const PHONE_ICON =
+  '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="currentColor">' +
+  '<path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.61 21 3 13.39 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2Z"/>' +
+  '</svg>';
 
 const WA_ICON =
   '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="currentColor">' +
@@ -130,7 +136,30 @@ const STRINGS = {
     cashEntryDeleted: 'Cash entry deleted.',
     deleteCashConfirm: 'Delete this cash entry?',
     exportCashCsv: 'Download CSV',
-    cashDayTotal: 'Day total'
+    cashDayTotal: 'Day total',
+    youWillGet: 'You will get',
+    youWillGive: 'You will give',
+    viewReports: 'View reports',
+    openCashbook: 'Open cashbook',
+    customerTag: 'Customer',
+    reminderAction: 'Reminder',
+    reportAction: 'Report',
+    callAction: 'Call',
+    youGave: 'You gave',
+    youGot: 'You got',
+    requestAction: 'Request',
+    payAction: 'Pay',
+    newCustomer: 'New customer',
+    daysAgo: '{n} days ago',
+    todayLabel: 'Today',
+    yesterdayLabel: 'Yesterday',
+    filterGet: 'You will get',
+    filterGive: 'You will give',
+    settled: 'Settled',
+    totalBalance: 'Total balance',
+    todaysBalance: 'Today\'s balance',
+    cashReport: 'View cashbook report',
+    entriesCount: '{n} entries'
   },
   hi: {
     totalOutstanding: 'कुल बकाया',
@@ -238,7 +267,30 @@ const STRINGS = {
     cashEntryDeleted: 'कैश एंट्री हटा दी गई।',
     deleteCashConfirm: 'यह कैश एंट्री हटाएँ?',
     exportCashCsv: 'CSV डाउनलोड करें',
-    cashDayTotal: 'दिन का कुल'
+    cashDayTotal: 'दिन का कुल',
+    youWillGet: 'आपको मिलेगा',
+    youWillGive: 'आपको देना है',
+    viewReports: 'रिपोर्ट देखें',
+    openCashbook: 'कैशबुक खोलें',
+    customerTag: 'ग्राहक',
+    reminderAction: 'रिमाइंडर',
+    reportAction: 'रिपोर्ट',
+    callAction: 'कॉल',
+    youGave: 'आपने दिया',
+    youGot: 'आपको मिला',
+    requestAction: 'माँगें',
+    payAction: 'भुगतान',
+    newCustomer: 'नया ग्राहक',
+    daysAgo: '{n} दिन पहले',
+    todayLabel: 'आज',
+    yesterdayLabel: 'कल',
+    filterGet: 'आपको मिलेगा',
+    filterGive: 'आपको देना है',
+    settled: 'भुगतान हो गया',
+    totalBalance: 'कुल बैलेंस',
+    todaysBalance: 'आज का बैलेंस',
+    cashReport: 'कैशबुक रिपोर्ट देखें',
+    entriesCount: '{n} एंट्री'
   },
   te: {
     totalOutstanding: 'మొత్తం బాకీ',
@@ -346,7 +398,30 @@ const STRINGS = {
     cashEntryDeleted: 'నగదు ఎంట్రీ తొలగించబడింది.',
     deleteCashConfirm: 'ఈ నగదు ఎంట్రీని తొలగించాలా?',
     exportCashCsv: 'CSV డౌన్‌లోడ్',
-    cashDayTotal: 'రోజు మొత్తం'
+    cashDayTotal: 'రోజు మొత్తం',
+    youWillGet: 'మీకు రావాల్సింది',
+    youWillGive: 'మీరు ఇవ్వాల్సింది',
+    viewReports: 'రిపోర్ట్‌లు చూడండి',
+    openCashbook: 'క్యాష్‌బుక్ తెరవండి',
+    customerTag: 'కస్టమర్',
+    reminderAction: 'రిమైండర్',
+    reportAction: 'రిపోర్ట్',
+    callAction: 'కాల్',
+    youGave: 'మీరు ఇచ్చారు',
+    youGot: 'మీకు వచ్చింది',
+    requestAction: 'అడగండి',
+    payAction: 'చెల్లించండి',
+    newCustomer: 'కొత్త కస్టమర్',
+    daysAgo: '{n} రోజుల క్రితం',
+    todayLabel: 'ఈరోజు',
+    yesterdayLabel: 'నిన్న',
+    filterGet: 'రావాల్సింది',
+    filterGive: 'ఇవ్వాల్సింది',
+    settled: 'సెటిల్ అయింది',
+    totalBalance: 'మొత్తం బ్యాలెన్స్',
+    todaysBalance: 'ఈరోజు బ్యాలెన్స్',
+    cashReport: 'క్యాష్‌బుక్ రిపోర్ట్ చూడండి',
+    entriesCount: '{n} ఎంట్రీలు'
   }
 };
 
@@ -458,6 +533,7 @@ let pendingDeleteId = null;
 let pendingCashDeleteId = null;
 let activeTab = 'collection';
 let cashFilter = 'all';
+let customerFilter = 'all';
 
 function normalizeState(raw, keepMeta) {
   const shop = typeof raw?.shop === 'string' && raw.shop.trim() ? raw.shop.trim() : 'My shop';
@@ -623,10 +699,74 @@ function customersWithBalance() {
   return state.customers.filter(function (customer) { return balanceFor(customer.phone) > 0; }).length;
 }
 
+function lastActivityDate(phone) {
+  let last = '';
+  for (const entry of state.entries) {
+    if (entry.phone !== phone) continue;
+    if (!last || entry.date > last) last = entry.date;
+  }
+  return last;
+}
+
 function sortedCustomers() {
   return state.customers.slice().sort(function (a, b) {
+    const lastA = lastActivityDate(a.phone);
+    const lastB = lastActivityDate(b.phone);
+    if (lastA !== lastB) return lastA < lastB ? 1 : -1;
     return a.name.localeCompare(b.name, 'en-IN');
   });
+}
+
+function avClass(phone) {
+  let sum = 0;
+  for (const digit of String(phone)) sum += Number(digit) || 0;
+  return 'av-' + (sum % 6);
+}
+
+function daysAgoText(phone) {
+  const last = lastActivityDate(phone);
+  if (!last) return t('newCustomer');
+  const days = daysBetween(last, todayISO());
+  if (days === 0) return t('todayLabel');
+  if (days === 1) return t('yesterdayLabel');
+  return t('daysAgo', { n: days });
+}
+
+function formatTime(timestamp) {
+  const date = new Date(Number(timestamp));
+  if (Number.isNaN(date.getTime())) return '';
+  return date.toLocaleTimeString('en-IN', { hour: 'numeric', minute: '2-digit' });
+}
+
+function receivables() {
+  let total = 0;
+  for (const customer of state.customers) {
+    const balance = balanceFor(customer.phone);
+    if (balance > 0) total += balance;
+  }
+  return round2(total);
+}
+
+function payables() {
+  let total = 0;
+  for (const customer of state.customers) {
+    const balance = balanceFor(customer.phone);
+    if (balance < 0) total += -balance;
+  }
+  return round2(total);
+}
+
+function cashTotalsForDate(date) {
+  let cashIn = 0;
+  let cashOut = 0;
+  let count = 0;
+  for (const entry of state.cashEntries || []) {
+    if (entry.date !== date) continue;
+    count += 1;
+    if (entry.type === 'in') cashIn += entry.amount;
+    else cashOut += entry.amount;
+  }
+  return { in: round2(cashIn), out: round2(cashOut), net: round2(cashIn - cashOut), count: count };
 }
 
 function sortedEntries(phone) {
@@ -870,216 +1010,268 @@ function setImportStatus(message, isError) {
 
 /* ---------------- dashboard ---------------- */
 
+﻿function syncHeaderTabs() {
+  if (!mainTabs) return;
+  mainTabs.hidden = false;
+  mainTabs.querySelectorAll('[data-tab]').forEach(function (button) {
+    const name = button.getAttribute('data-tab');
+    button.textContent = name === 'collection' ? t('customers') : t('cashbook');
+    const on = name === activeTab;
+    button.classList.toggle('active', on);
+    button.setAttribute('aria-selected', String(on));
+  });
+}
+
 function renderDashboard() {
   const customers = sortedCustomers();
-  const total = totalOutstanding();
   const credit = creditTotal();
   const paid = paidTotal();
-  const pendingCount = customersWithBalance();
+  const youGet = receivables();
+  const youGive = payables();
   const cash = cashTotals();
+  const today = todayISO();
+  const todayCash = cashTotalsForDate(today);
   const cashCount = (state.cashEntries || []).length;
+  const overdue = overdueList();
 
-  const rows = customers.map(function (customer) {
+  syncHeaderTabs();
+
+  const filteredCustomers = customers.filter(function (customer) {
+    const balance = balanceFor(customer.phone);
+    if (customerFilter === 'get') return balance > 0;
+    if (customerFilter === 'give') return balance < 0;
+    if (customerFilter === 'settled') return balance === 0;
+    return true;
+  });
+
+  const rows = filteredCustomers.map(function (customer) {
     const balance = balanceFor(customer.phone);
     const cls = balance > 0 ? 'due' : balance < 0 ? 'advance' : 'zero';
+    const actionLabel = balance > 0 ? t('requestAction') : balance < 0 ? t('payAction') : t('remind');
     return (
       '<div class="row" data-customer="' + customer.phone + '" ' +
         'data-name="' + esc(customer.name.toLowerCase()) + '" data-phone="' + customer.phone + '">' +
         '<a class="row-main" href="#/customer/' + customer.phone + '">' +
-          '<span class="avatar" aria-hidden="true">' + esc(initials(customer.name)) + '</span>' +
+          '<span class="avatar ' + avClass(customer.phone) + '" aria-hidden="true">' +
+            esc(initials(customer.name)) + '</span>' +
           '<span class="row-text">' +
             '<span class="row-name">' + esc(customer.name) + '</span>' +
-            '<span class="row-phone">' + formatPhone(customer.phone) + '</span>' +
+            '<span class="row-phone">' + esc(daysAgoText(customer.phone)) + '</span>' +
           '</span>' +
         '</a>' +
-        '<a class="row-balance ' + cls + '" href="#/customer/' + customer.phone + '" ' +
-          'data-balance="' + balance + '" aria-label="' + esc(t('balance') + ': ' + money(balance)) + '">' +
-          money(balance) +
-        '</a>' +
-        '<a class="wa-btn" data-remind="' + customer.phone + '" href="' + esc(waLink(customer)) + '" ' +
-          'target="_blank" rel="noopener" ' +
-          'aria-label="' + esc(t('remind') + ': ' + customer.name) + '">' +
-          WA_ICON + '<span>' + t('remind') + '</span>' +
-        '</a>' +
+        '<div class="row-right">' +
+          '<span class="row-balance ' + cls + '" data-balance="' + balance + '">' +
+            money(balance) + '</span>' +
+          '<a class="row-action ' + cls + '" data-remind="' + customer.phone + '" ' +
+            'href="' + esc(waLink(customer)) + '" target="_blank" rel="noopener">' +
+            actionLabel + '</a>' +
+        '</div>' +
       '</div>'
     );
   }).join('');
 
-  const overdue = overdueList();
   const overdueRows = overdue.map(function (item) {
     return (
       '<div class="row overdue-row">' +
         '<a class="row-main" href="#/customer/' + item.customer.phone + '">' +
-          '<span class="avatar warm" aria-hidden="true">' + esc(initials(item.customer.name)) + '</span>' +
+          '<span class="avatar ' + avClass(item.customer.phone) + '" aria-hidden="true">' +
+            esc(initials(item.customer.name)) + '</span>' +
           '<span class="row-text">' +
             '<span class="row-name">' + esc(item.customer.name) + '</span>' +
             '<span class="row-phone">' +
-              (item.lastPayment ? t('daysSince', { n: item.days }) : t('noPaymentYet')) +
+              esc(item.lastPayment ? t('daysSince', { n: item.days }) : t('noPaymentYet')) +
             '</span>' +
           '</span>' +
         '</a>' +
-        '<a class="row-balance due" href="#/customer/' + item.customer.phone + '">' +
-          money(item.balance) +
-        '</a>' +
-        '<a class="wa-btn" href="' + esc(waLink(item.customer)) + '" target="_blank" rel="noopener">' +
-          WA_ICON + '<span>' + t('remind') + '</span>' +
-        '</a>' +
+        '<div class="row-right">' +
+          '<span class="row-balance due">' + money(item.balance) + '</span>' +
+          '<a class="row-action due" href="' + esc(waLink(item.customer)) + '" ' +
+            'target="_blank" rel="noopener">' + t('remind') + '</a>' +
+        '</div>' +
       '</div>'
     );
   }).join('');
 
+  const customerChips = [
+    ['all', t('all')],
+    ['get', t('filterGet')],
+    ['give', t('filterGive')],
+    ['settled', t('settled')]
+  ].map(function (pair) {
+    return '<button type="button" class="chip' + (customerFilter === pair[0] ? ' active' : '') + '" ' +
+      'data-customer-filter="' + pair[0] + '">' + pair[1] + '</button>';
+  }).join('');
+
+  const cashChips = ['all', 'in', 'out'].map(function (key) {
+    const label = key === 'all' ? t('all') : key === 'in' ? t('cashInShort') : t('cashOutShort');
+    return '<button type="button" class="chip' + (cashFilter === key ? ' active' : '') + '" ' +
+      'data-cash-filter="' + key + '">' + label + '</button>';
+  }).join('');
+
+  const customerRowsBlock = customers.length
+    ? '<div class="rows" id="customer-rows">' + rows + '</div>' +
+      '<p class="empty" id="no-matches"' + (filteredCustomers.length ? ' hidden' : '') + '>' +
+        t('noMatches') + '</p>'
+    : '<p class="empty">' + t('noCustomers') + '</p>';
+
   appEl.innerHTML =
-    '<section class="book-grid">' +
-      '<button type="button" class="book-card' + (activeTab === 'collection' ? ' active' : '') + '" ' +
-        'data-tab="collection" aria-pressed="' + (activeTab === 'collection') + '">' +
-        '<span class="book-top">' +
-          '<span class="book-icon" aria-hidden="true">₹</span>' +
-          '<span class="book-label">' + t('collection') + '</span>' +
-        '</span>' +
-        '<span class="book-amount" id="total-outstanding">' + money(total) +
-          '<span class="sr-only"> (' + plainAmount(total) + ')</span></span>' +
-        '<span class="book-meta">' +
-          esc(t('totalShort') + ' ' + money(credit) + ' · ' + t('paidLabel') + ' ' + money(paid)) +
-        '</span>' +
-      '</button>' +
-      '<button type="button" class="book-card cash' + (activeTab === 'cashbook' ? ' active' : '') + '" ' +
-        'data-tab="cashbook" aria-pressed="' + (activeTab === 'cashbook') + '">' +
-        '<span class="book-top">' +
-          '<span class="book-icon" aria-hidden="true">▤</span>' +
-          '<span class="book-label">' + t('cashbook') + '</span>' +
-        '</span>' +
-        '<span class="book-amount" id="cash-in-hand">' + money(cash.balance) + '</span>' +
-        '<span class="book-meta">' +
-          esc(t('cashIn') + ' ' + money(cash.in) + ' · ' + t('cashOut') + ' ' + money(cash.out)) +
-        '</span>' +
-      '</button>' +
+    '<section class="card summary-strip">' +
+      '<div class="summary-grid">' +
+        '<div class="sum-cell">' +
+          '<span class="sum-label">' + t('youWillGet') + '</span>' +
+          '<span class="sum-value get" id="total-outstanding">' + money(youGet) +
+            '<span class="sr-only"> (' + plainAmount(youGet) + ')</span></span>' +
+        '</div>' +
+        '<div class="sum-cell">' +
+          '<span class="sum-label">' + t('youWillGive') + '</span>' +
+          '<span class="sum-value give" id="you-will-give">' + money(youGive) + '</span>' +
+        '</div>' +
+        '<div class="sum-cell">' +
+          '<span class="sum-label">' + t('cashInHand') + '</span>' +
+          '<span class="sum-value cash" id="cash-in-hand">' + money(cash.balance) + '</span>' +
+        '</div>' +
+      '</div>' +
+      '<div class="summary-actions">' +
+        '<button type="button" class="summary-action" id="view-reports">' + t('viewReports') + '</button>' +
+        '<button type="button" class="summary-action" id="open-cashbook">' + t('openCashbook') + '</button>' +
+      '</div>' +
     '</section>' +
 
     '<div class="tab-panel" data-panel="collection"' + (activeTab === 'collection' ? '' : ' hidden') + '>' +
 
-    '<section class="card stats" aria-label="' + esc(t('totalOutstanding')) + '">' +
-      '<div class="stat">' +
-        '<span class="stat-label">' + t('totalAmount') + '</span>' +
-        '<span class="stat-value" id="total-amount">' + money(credit) + '</span>' +
-      '</div>' +
-      '<div class="stat">' +
-        '<span class="stat-label">' + t('paidAmount') + '</span>' +
-        '<span class="stat-value paid" id="paid-amount">' + money(paid) + '</span>' +
-      '</div>' +
-      '<div class="stat">' +
-        '<span class="stat-label">' + t('pendingAmount') + '</span>' +
-        '<span class="stat-value due" id="pending-amount">' + money(total) + '</span>' +
-      '</div>' +
-    '</section>' +
-
-    '<section class="card list-card">' +
-      '<div class="list-head">' +
-        '<h2>' + t('customers') + ' <span class="count-pill">' + customers.length + '</span></h2>' +
-        '<button type="button" class="btn ghost small" id="export-csv">' + t('exportCsv') + '</button>' +
-      '</div>' +
-      '<div class="search-row">' +
-        '<input type="search" id="search" class="search-input" placeholder="' + esc(t('searchPlaceholder')) + '" ' +
-          'aria-label="' + esc(t('searchPlaceholder')) + '">' +
-      '</div>' +
-      (customers.length
-        ? '<div class="rows" id="customer-rows">' + rows + '</div>' +
-          '<p class="empty" id="no-matches" hidden>' + t('noMatches') + '</p>'
-        : '<p class="empty">' + t('noCustomers') + '</p>') +
-    '</section>' +
-
-    (overdue.length
-      ? '<section class="card overdue-card">' +
-          '<div class="list-head"><h2>' + t('overdue') + '</h2>' +
-            '<span class="muted small-text">' + t('overdueHint') + '</span></div>' +
-          '<div class="rows">' + overdueRows + '</div>' +
-        '</section>'
-      : '') +
-
-    '<section class="card">' +
-      '<h2>' + t('addCustomer') + '</h2>' +
-      '<form id="addCustomerForm" class="inline-form" novalidate>' +
-        '<div class="field">' +
-          '<label for="custName">' + t('name') + '</label>' +
-          '<input id="custName" name="name" type="text" autocomplete="off" maxlength="60" ' +
-            'placeholder="' + esc(t('namePlaceholder')) + '" required>' +
+      '<section class="card stats" id="collection-stats" aria-label="' + esc(t('totalOutstanding')) + '">' +
+        '<div class="stat">' +
+          '<span class="stat-label">' + t('totalAmount') + '</span>' +
+          '<span class="stat-value" id="total-amount">' + money(credit) + '</span>' +
         '</div>' +
-        '<div class="field">' +
-          '<label for="custPhone">' + t('phone') + '</label>' +
-          '<input id="custPhone" name="phone" type="tel" inputmode="numeric" autocomplete="off" ' +
-            'maxlength="10" pattern="[0-9]{10}" placeholder="' + esc(t('phonePlaceholder')) + '" required>' +
+        '<div class="stat">' +
+          '<span class="stat-label">' + t('paidAmount') + '</span>' +
+          '<span class="stat-value paid" id="paid-amount">' + money(paid) + '</span>' +
         '</div>' +
-        '<button class="btn primary" type="submit">' + t('add') + '</button>' +
-      '</form>' +
-      '<p class="form-error" id="customerError" role="alert" hidden></p>' +
-    '</section>' +
+        '<div class="stat">' +
+          '<span class="stat-label">' + t('pendingAmount') + '</span>' +
+          '<span class="stat-value due" id="pending-amount">' + money(youGet) + '</span>' +
+        '</div>' +
+      '</section>' +
+
+      '<section class="card list-card">' +
+        '<div class="list-head">' +
+          '<h2>' + t('customers') + ' <span class="count-pill">' + customers.length + '</span></h2>' +
+          '<button type="button" class="btn ghost small" id="export-csv">' + t('exportCsv') + '</button>' +
+        '</div>' +
+        '<div class="search-row">' +
+          '<input type="search" id="search" class="search-input" ' +
+            'placeholder="' + esc(t('searchPlaceholder')) + '" ' +
+            'aria-label="' + esc(t('searchPlaceholder')) + '">' +
+        '</div>' +
+        '<div class="chips-row">' + customerChips + '</div>' +
+        customerRowsBlock +
+      '</section>' +
+
+      (overdue.length
+        ? '<section class="card overdue-card">' +
+            '<div class="list-head"><h2>' + t('overdue') + '</h2>' +
+              '<span class="muted small-text">' + t('overdueHint') + '</span></div>' +
+            '<div class="rows">' + overdueRows + '</div>' +
+          '</section>'
+        : '') +
+
+      '<section class="card">' +
+        '<h2>' + t('addCustomer') + '</h2>' +
+        '<form id="addCustomerForm" class="inline-form" novalidate>' +
+          '<div class="field">' +
+            '<label for="custName">' + t('name') + '</label>' +
+            '<input id="custName" name="name" type="text" autocomplete="off" maxlength="60" ' +
+              'placeholder="' + esc(t('namePlaceholder')) + '" required>' +
+          '</div>' +
+          '<div class="field">' +
+            '<label for="custPhone">' + t('phone') + '</label>' +
+            '<input id="custPhone" name="phone" type="tel" inputmode="numeric" autocomplete="off" ' +
+              'maxlength="10" pattern="[0-9]{10}" placeholder="' + esc(t('phonePlaceholder')) + '" required>' +
+          '</div>' +
+          '<button class="btn primary" type="submit">' + t('add') + '</button>' +
+        '</form>' +
+        '<p class="form-error" id="customerError" role="alert" hidden></p>' +
+      '</section>' +
+
+      '<div class="action-bar">' +
+        '<button type="button" class="action-btn add" data-quick-add-customer>' +
+          '<span class="action-sign">+</span>' + t('addCustomer') +
+        '</button>' +
+      '</div>' +
 
     '</div>' +
 
     '<div class="tab-panel" data-panel="cashbook"' + (activeTab === 'cashbook' ? '' : ' hidden') + '>' +
 
-    '<section class="card stats cash-stats" aria-label="' + esc(t('cashbook')) + '">' +
-      '<div class="stat">' +
-        '<span class="stat-label">' + t('cashIn') + '</span>' +
-        '<span class="stat-value paid" id="cash-total-in">' + money(cash.in) + '</span>' +
-      '</div>' +
-      '<div class="stat">' +
-        '<span class="stat-label">' + t('cashOut') + '</span>' +
-        '<span class="stat-value due" id="cash-total-out">' + money(cash.out) + '</span>' +
-      '</div>' +
-      '<div class="stat">' +
-        '<span class="stat-label">' + t('cashInHand') + '</span>' +
-        '<span class="stat-value gold" id="cash-balance">' + money(cash.balance) + '</span>' +
-      '</div>' +
-    '</section>' +
+      '<section class="card cash-summary" aria-label="' + esc(t('cashbook')) + '">' +
+        '<div class="cash-panel">' +
+          '<span class="cash-panel-title">' + t('totalBalance') + '</span>' +
+          '<strong class="cash-panel-value">' + money(cash.balance) + '</strong>' +
+          '<div class="cash-sub"><span>' + t('cashInHand') + '</span>' +
+            '<strong>' + money(cash.balance) + '</strong></div>' +
+          '<div class="cash-sub"><span>' + t('cashInShort') + ' / ' + t('cashOutShort') + '</span>' +
+            '<strong>' + money(cash.in) + ' / ' + money(cash.out) + '</strong></div>' +
+        '</div>' +
+        '<div class="cash-panel">' +
+          '<span class="cash-panel-title">' + t('todaysBalance') + '</span>' +
+          '<strong class="cash-panel-value">' + money(todayCash.net) + '</strong>' +
+          '<div class="cash-sub"><span>' + t('cashIn') + '</span>' +
+            '<strong>' + money(todayCash.in) + '</strong></div>' +
+          '<div class="cash-sub"><span>' + t('cashOut') + '</span>' +
+            '<strong>' + money(todayCash.out) + '</strong></div>' +
+        '</div>' +
+        '<button type="button" class="cash-report" id="cash-export">' + t('cashReport') + '</button>' +
+      '</section>' +
 
-    '<section class="card">' +
-      '<h2>' + t('addCashEntry') + '</h2>' +
-      '<form id="cashForm" novalidate>' +
-        '<div class="seg cash-seg" role="radiogroup" aria-label="' + esc(t('addCashEntry')) + '">' +
-          '<label class="seg-opt">' +
-            '<input type="radio" name="cashType" value="in" checked>' +
-            '<span class="cash-in">' + t('cashEntryIn') + '</span>' +
-          '</label>' +
-          '<label class="seg-opt">' +
-            '<input type="radio" name="cashType" value="out">' +
-            '<span class="cash-out">' + t('cashEntryOut') + '</span>' +
-          '</label>' +
+      '<section class="card cash-list-card" style="padding:0;overflow:hidden">' +
+        '<div class="list-head" style="padding:14px 16px 0">' +
+          '<h2>' + t('cashEntries') + ' <span class="count-pill">' + cashCount + '</span></h2>' +
         '</div>' +
-        '<div class="grid2">' +
-          '<div class="field">' +
-            '<label for="cashAmount">' + t('cashAmount') + '</label>' +
-            '<input id="cashAmount" name="amount" type="number" inputmode="decimal" min="1" step="0.01" ' +
-              'placeholder="0" required>' +
-          '</div>' +
-          '<div class="field">' +
-            '<label for="cashDate">' + t('date') + '</label>' +
-            '<input id="cashDate" name="date" type="date" value="' + todayISO() + '" required>' +
-          '</div>' +
-        '</div>' +
-        '<div class="field" style="margin-top:12px">' +
-          '<label for="cashNote">' + t('cashNote') + ' <span class="optional">' + t('optional') + '</span></label>' +
-          '<input id="cashNote" name="note" type="text" maxlength="140" ' +
-            'placeholder="' + esc(t('cashNotePlaceholder')) + '">' +
-        '</div>' +
-        '<p class="form-error" id="cashError" role="alert" hidden></p>' +
-        '<button class="btn gold-btn wide" type="submit">' + t('addCashEntry') + '</button>' +
-      '</form>' +
-    '</section>' +
+        '<div class="chips-row" style="padding-top:10px">' + cashChips + '</div>' +
+        cashEntryRowsHtml() +
+      '</section>' +
 
-    '<section class="card">' +
-      '<div class="list-head">' +
-        '<h2>' + t('cashEntries') + ' <span class="count-pill gold">' + cashCount + '</span></h2>' +
-        '<button type="button" class="btn ghost small" id="cash-export">' + t('exportCashCsv') + '</button>' +
+      '<section class="card" id="cash-form-card">' +
+        '<h2>' + t('addCashEntry') + '</h2>' +
+        '<form id="cashForm" novalidate>' +
+          '<div class="seg cash-seg" role="radiogroup" aria-label="' + esc(t('addCashEntry')) + '">' +
+            '<label class="seg-opt">' +
+              '<input type="radio" name="cashType" value="in" checked>' +
+              '<span class="cash-in">' + t('cashEntryIn') + '</span>' +
+            '</label>' +
+            '<label class="seg-opt">' +
+              '<input type="radio" name="cashType" value="out">' +
+              '<span class="cash-out">' + t('cashEntryOut') + '</span>' +
+            '</label>' +
+          '</div>' +
+          '<div class="grid2">' +
+            '<div class="field">' +
+              '<label for="cashAmount">' + t('cashAmount') + '</label>' +
+              '<input id="cashAmount" name="amount" type="number" inputmode="decimal" min="1" step="0.01" ' +
+                'placeholder="0" required>' +
+            '</div>' +
+            '<div class="field">' +
+              '<label for="cashDate">' + t('date') + '</label>' +
+              '<input id="cashDate" name="date" type="date" value="' + todayISO() + '" required>' +
+            '</div>' +
+          '</div>' +
+          '<div class="field" style="margin-top:12px">' +
+            '<label for="cashNote">' + t('cashNote') + ' <span class="optional">' + t('optional') + '</span></label>' +
+            '<input id="cashNote" name="note" type="text" maxlength="140" ' +
+              'placeholder="' + esc(t('cashNotePlaceholder')) + '">' +
+          '</div>' +
+          '<p class="form-error" id="cashError" role="alert" hidden></p>' +
+          '<button class="btn gold-btn wide" type="submit">' + t('addCashEntry') + '</button>' +
+        '</form>' +
+      '</section>' +
+
+      '<div class="action-bar">' +
+        '<button type="button" class="action-btn cash-out" data-quick-cash="out">' +
+          '<span class="action-sign">\u2212</span>' + t('cashOutShort') + '</button>' +
+        '<button type="button" class="action-btn cash-in" data-quick-cash="in">' +
+          '<span class="action-sign">+</span>' + t('cashInShort') + '</button>' +
       '</div>' +
-      '<div class="chips">' +
-        ['all', 'in', 'out'].map(function (key) {
-          const label = key === 'all' ? t('all') : key === 'in' ? t('cashInShort') : t('cashOutShort');
-          return '<button type="button" class="chip' + (cashFilter === key ? ' active' : '') + '" ' +
-            'data-cash-filter="' + key + '">' + label + '</button>';
-        }).join('') +
-      '</div>' +
-      cashEntryRowsHtml() +
-    '</section>' +
 
     '</div>' +
 
@@ -1135,9 +1327,7 @@ function renderDashboard() {
       document.querySelectorAll('#customer-rows .row').forEach(function (row) {
         const name = row.getAttribute('data-name') || '';
         const phone = row.getAttribute('data-phone') || '';
-        const show = !query ||
-          name.indexOf(query) >= 0 ||
-          (digits.length > 0 && phone.indexOf(digits) >= 0);
+        const show = !query || name.indexOf(query) >= 0 || (digits.length > 0 && phone.indexOf(digits) >= 0);
         row.hidden = !show;
         if (show) visible += 1;
       });
@@ -1145,6 +1335,39 @@ function renderDashboard() {
       if (noMatches) noMatches.hidden = visible !== 0;
     });
   }
+
+  document.querySelectorAll('[data-customer-filter]').forEach(function (button) {
+    button.addEventListener('click', function () {
+      customerFilter = button.getAttribute('data-customer-filter') || 'all';
+      renderDashboard();
+    });
+  });
+
+  document.getElementById('open-cashbook').addEventListener('click', function () {
+    activateTab('cashbook');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  document.getElementById('view-reports').addEventListener('click', function () {
+    activateTab('collection');
+    const stats = document.getElementById('collection-stats');
+    if (stats) stats.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  document.querySelectorAll('[data-cash-filter]').forEach(function (button) {
+    button.addEventListener('click', function () {
+      cashFilter = button.getAttribute('data-cash-filter') || 'all';
+      renderDashboard();
+    });
+  });
+
+  document.getElementById('cash-export').addEventListener('click', exportCashCsv);
+
+  const cashForm = document.getElementById('cashForm');
+  cashForm.addEventListener('submit', function (event) {
+    event.preventDefault();
+    addCashEntry(cashForm);
+  });
 
   document.getElementById('import-go').addEventListener('click', function () {
     const box = document.getElementById('import-box');
@@ -1165,27 +1388,6 @@ function renderDashboard() {
 
   document.getElementById('export-csv').addEventListener('click', exportCsv);
 
-  document.querySelectorAll('[data-tab]').forEach(function (button) {
-    button.addEventListener('click', function () {
-      activateTab(button.getAttribute('data-tab'));
-    });
-  });
-
-  document.querySelectorAll('[data-cash-filter]').forEach(function (button) {
-    button.addEventListener('click', function () {
-      cashFilter = button.getAttribute('data-cash-filter') || 'all';
-      renderDashboard();
-    });
-  });
-
-  const cashForm = document.getElementById('cashForm');
-  cashForm.addEventListener('submit', function (event) {
-    event.preventDefault();
-    addCashEntry(cashForm);
-  });
-
-  document.getElementById('cash-export').addEventListener('click', exportCashCsv);
-
   const settingsForm = document.getElementById('settingsForm');
   settingsForm.addEventListener('submit', function (event) {
     event.preventDefault();
@@ -1202,12 +1404,15 @@ function renderDashboard() {
 function activateTab(name) {
   if (name !== 'collection' && name !== 'cashbook') return;
   activeTab = name;
-  document.querySelectorAll('[data-tab]').forEach(function (button) {
-    const on = button.getAttribute('data-tab') === name;
-    button.classList.toggle('active', on);
-    button.setAttribute('aria-pressed', String(on));
-  });
-  document.querySelectorAll('[data-panel]').forEach(function (panel) {
+  if (mainTabs) {
+    mainTabs.hidden = false;
+    mainTabs.querySelectorAll('[data-tab]').forEach(function (button) {
+      const on = button.getAttribute('data-tab') === name;
+      button.classList.toggle('active', on);
+      button.setAttribute('aria-selected', String(on));
+    });
+  }
+  appEl.querySelectorAll('[data-panel]').forEach(function (panel) {
     panel.hidden = panel.getAttribute('data-panel') !== name;
   });
 }
@@ -1216,7 +1421,7 @@ function cashEntryRowsHtml() {
   const entries = sortedCashEntries().filter(function (entry) {
     return cashFilter === 'all' || entry.type === cashFilter;
   });
-  if (!entries.length) return '<p class="empty">' + t('noCashEntries') + '</p>';
+  if (!entries.length) return '<p class="ledger-empty">' + t('noCashEntries') + '</p>';
 
   const groups = new Map();
   for (const entry of entries) {
@@ -1224,16 +1429,21 @@ function cashEntryRowsHtml() {
     groups.get(entry.date).push(entry);
   }
 
-  let html = '<div class="cash-list">';
+  let html = '';
   groups.forEach(function (list, date) {
-    let net = 0;
-    for (const entry of list) net += entry.type === 'in' ? entry.amount : -entry.amount;
-    net = round2(net);
-    html += '<div class="cash-day">' +
-      '<span>' + formatDate(date) + '</span>' +
-      '<span class="cash-day-net ' + (net > 0 ? 'in' : net < 0 ? 'out' : 'zero') + '">' +
-        (net > 0 ? '+' : '') + money(net) +
-      '</span>' +
+    let dayIn = 0;
+    let dayOut = 0;
+    for (const entry of list) {
+      if (entry.type === 'in') dayIn += entry.amount;
+      else dayOut += entry.amount;
+    }
+    html += '<div class="cash-day-head">' +
+      '<div class="cash-day-date"><strong>' + formatDate(date) + '</strong>' +
+        '<span>' + t('entriesCount', { n: list.length }) + '</span></div>' +
+      '<div class="cash-day-col out"><span>' + t('cashOutShort') + '</span>' +
+        '<strong>' + money(dayOut) + '</strong></div>' +
+      '<div class="cash-day-col in"><span>' + t('cashInShort') + '</span>' +
+        '<strong>' + money(dayIn) + '</strong></div>' +
     '</div>';
 
     for (const entry of list) {
@@ -1247,25 +1457,22 @@ function cashEntryRowsHtml() {
         continue;
       }
       const isIn = entry.type === 'in';
-      const title = entry.note || (isIn ? t('cashIn') : t('cashOut'));
-      html += '<div class="cash-row">' +
-        '<span class="cash-badge ' + entry.type + '">' +
-          (isIn ? t('cashInShort') : t('cashOutShort')) + '</span>' +
-        '<div class="cash-main">' +
-          '<span class="cash-note">' + esc(title) + '</span>' +
-          '<span class="cash-meta">' + formatDate(entry.date) + ' · ' +
+      html += '<div class="cash-table-row">' +
+        '<div class="cash-time">' + formatTime(entry.createdAt) +
+          (entry.note ? '<span class="cash-note-line">' + esc(entry.note) + '</span>' : '') +
+          '<div class="cash-time-actions">' +
             '<button type="button" class="link-btn tiny danger" data-cash-delete="' +
               esc(entry.id) + '">' + t('delete') + '</button>' +
-          '</span>' +
+          '</div>' +
         '</div>' +
-        '<span class="cash-amount ' + entry.type + '">' +
-          (isIn ? '+' : '\u2212') + money(entry.amount) + '</span>' +
+        '<div class="cash-cell out">' + (!isIn ? money(entry.amount) : '') + '</div>' +
+        '<div class="cash-cell in">' + (isIn ? money(entry.amount) : '') + '</div>' +
       '</div>';
     }
   });
-  html += '</div>';
   return html;
 }
+
 
 function addCashEntry(form) {
   const errorEl = document.getElementById('cashError');
@@ -1379,6 +1586,7 @@ function importText(text, fileName) {
   pendingCashDeleteId = null;
   activeTab = 'collection';
   cashFilter = 'all';
+  customerFilter = 'all';
 
   if (location.hash && location.hash !== '#/') {
     location.hash = '#/';
@@ -1445,177 +1653,222 @@ function exportCsv() {
 
 /* ---------------- customer page ---------------- */
 
-function entryActions(entry) {
-  if (pendingDeleteId === entry.id) {
-    return (
-      '<div class="entry-actions confirm-actions">' +
-        '<span class="confirm-text">' + t('deleteConfirm') + '</span>' +
-        '<button type="button" class="link-btn danger" data-delete-confirm="' + esc(entry.id) + '">' +
-          t('confirmDeleteBtn') + '</button>' +
-        '<button type="button" class="link-btn" data-cancel-delete="1">' + t('cancel') + '</button>' +
-      '</div>'
-    );
-  }
+﻿function editEntryFormHtml(entry) {
   return (
-    '<div class="entry-actions">' +
-      '<button type="button" class="link-btn" data-edit="' + esc(entry.id) + '">' + t('edit') + '</button>' +
-      '<button type="button" class="link-btn danger" data-delete="' + esc(entry.id) + '">' + t('delete') + '</button>' +
-    '</div>'
+    '<form class="edit-form" data-edit-form="' + esc(entry.id) + '" novalidate>' +
+      '<p class="edit-title">' + t('editEntry') + '</p>' +
+      '<div class="seg" role="radiogroup" aria-label="' + esc(t('editEntry')) + '">' +
+        '<label class="seg-opt">' +
+          '<input type="radio" name="editType" value="credit"' + (entry.type === 'credit' ? ' checked' : '') + '>' +
+          '<span class="credit">' + t('credit') + '</span>' +
+        '</label>' +
+        '<label class="seg-opt">' +
+          '<input type="radio" name="editType" value="payment"' + (entry.type === 'payment' ? ' checked' : '') + '>' +
+          '<span class="payment">' + t('payment') + '</span>' +
+        '</label>' +
+      '</div>' +
+      '<div class="grid2">' +
+        '<div class="field">' +
+          '<label>' + t('amount') + '</label>' +
+          '<input name="amount" type="number" inputmode="decimal" min="1" step="0.01" ' +
+            'value="' + esc(entry.amount) + '" required>' +
+        '</div>' +
+        '<div class="field">' +
+          '<label>' + t('date') + '</label>' +
+          '<input name="date" type="date" value="' + esc(entry.date) + '" required>' +
+        '</div>' +
+      '</div>' +
+      '<div class="field" style="margin-top:12px">' +
+        '<label>' + t('note') + ' <span class="optional">' + t('optional') + '</span></label>' +
+        '<input name="note" type="text" maxlength="140" value="' + esc(entry.note) + '">' +
+      '</div>' +
+      '<p class="form-error" role="alert" hidden></p>' +
+      '<div class="btn-row">' +
+        '<button class="btn primary" type="submit">' + t('saveChanges') + '</button>' +
+        '<button class="btn ghost" type="button" data-cancel-edit="1">' + t('cancel') + '</button>' +
+      '</div>' +
+    '</form>'
   );
 }
 
-function entryHtml(entry) {
-  if (editingId === entry.id) {
+function ledgerRowsHtml(entries) {
+  const chronological = entries.slice().sort(function (a, b) {
+    if (a.date !== b.date) return a.date < b.date ? -1 : 1;
+    return (a.createdAt || 0) - (b.createdAt || 0);
+  });
+  let running = 0;
+  const runningById = {};
+  for (const entry of chronological) {
+    running += entry.type === 'credit' ? entry.amount : -entry.amount;
+    runningById[entry.id] = round2(running);
+  }
+
+  return entries.map(function (entry) {
+    if (editingId === entry.id) {
+      return '<div class="ledger-row ledger-edit-row">' + editEntryFormHtml(entry) + '</div>';
+    }
+
+    const isCredit = entry.type === 'credit';
+    const dateLine = formatDate(entry.date) +
+      (entry.createdAt ? ' · ' + formatTime(entry.createdAt) : '');
+    const actions = pendingDeleteId === entry.id
+      ? '<div class="ledger-actions">' +
+          '<button type="button" class="link-btn danger" data-delete-confirm="' + esc(entry.id) + '">' +
+            t('confirmDeleteBtn') + '</button>' +
+          '<button type="button" class="link-btn" data-cancel-delete="1">' + t('cancel') + '</button>' +
+        '</div>'
+      : '<div class="ledger-actions">' +
+          '<button type="button" class="link-btn" data-edit="' + esc(entry.id) + '">' + t('edit') + '</button>' +
+          '<button type="button" class="link-btn danger" data-delete="' + esc(entry.id) + '">' + t('delete') + '</button>' +
+        '</div>';
+    const shot = entry.image
+      ? '<button type="button" class="ledger-thumb" data-shot="' + esc(entry.id) + '" ' +
+          'aria-label="' + esc(t('screenshot')) + '">' +
+          '<img data-shot="' + esc(entry.id) + '" src="' + entry.image + '" alt="' +
+            esc(t('screenshot')) + '">' +
+        '</button>'
+      : '';
+
     return (
-      '<article class="entry editing">' +
-        '<form class="edit-form" data-edit-form="' + esc(entry.id) + '" novalidate>' +
-          '<p class="edit-title">' + t('editEntry') + '</p>' +
-          '<div class="seg" role="radiogroup" aria-label="' + esc(t('editEntry')) + '">' +
+      '<div class="ledger-row">' +
+        '<div class="ledger-info">' +
+          '<span class="ledger-date">' + dateLine + '</span>' +
+          (entry.note ? '<span class="ledger-note">' + esc(entry.note) + '</span>' : '') +
+          '<span class="ledger-bal">Bal. ' + money(runningById[entry.id]) + '</span>' +
+          actions +
+          shot +
+        '</div>' +
+        '<div class="ledger-cell gave">' + (isCredit ? money(entry.amount) : '') + '</div>' +
+        '<div class="ledger-cell got">' + (isCredit ? '' : money(entry.amount)) + '</div>' +
+      '</div>'
+    );
+  }).join('');
+}
+
+function renderCustomer(customer) {
+  if (mainTabs) mainTabs.hidden = true;
+
+  const balance = balanceFor(customer.phone);
+  const balanceCls = balance > 0 ? 'due' : balance < 0 ? 'advance' : 'zero';
+  const totals = customerTotals(customer.phone);
+  const entries = sortedEntries(customer.phone);
+  const balanceLabel = balance < 0 ? t('youWillGive') : t('youWillGet');
+
+  appEl.innerHTML =
+    '<div class="customer-view">' +
+      '<section class="cust-hero">' +
+        '<div class="cust-hero-top">' +
+          '<a class="cust-back" href="#/" aria-label="' + esc(t('back')) + '">&larr;</a>' +
+          '<span class="avatar cust-avatar" aria-hidden="true">' +
+            esc(initials(customer.name)) + '</span>' +
+          '<div class="cust-title">' +
+            '<h1>' + esc(customer.name) + ' <span class="cust-tag">' + t('customerTag') + '</span></h1>' +
+            '<span class="cust-phone-line">' + formatPhone(customer.phone) + '</span>' +
+          '</div>' +
+          '<a class="cust-call" href="tel:+91' + customer.phone + '" aria-label="' +
+            esc(t('callAction')) + '">' + PHONE_ICON + '</a>' +
+        '</div>' +
+        '<div class="cust-balance-card">' +
+          '<div>' +
+            '<span class="cust-balance-label">' + balanceLabel + '</span>' +
+            '<strong class="cust-balance-amt ' + balanceCls + '">' +
+              money(Math.abs(balance)) + '</strong>' +
+          '</div>' +
+          '<a class="wa-btn solid" href="' + esc(waLink(customer)) + '" target="_blank" rel="noopener">' +
+            WA_ICON + '<span>' + t('remind') + '</span>' +
+          '</a>' +
+        '</div>' +
+        '<div class="cust-quick-actions">' +
+          '<button type="button" class="qa" data-quick="payment">' +
+            '<span class="qa-icon">₹</span>' + t('paymentShort') + '</button>' +
+          '<a class="qa" href="' + esc(waLink(customer)) + '" target="_blank" rel="noopener">' +
+            '<span class="qa-icon">' + WA_ICON + '</span>' + t('reminderAction') + '</a>' +
+          '<button type="button" class="qa" data-scroll-ledger>' +
+            '<span class="qa-icon">▤</span>' + t('reportAction') + '</button>' +
+          '<a class="qa" href="tel:+91' + customer.phone + '">' +
+            '<span class="qa-icon">' + PHONE_ICON + '</span>' + t('callAction') + '</a>' +
+        '</div>' +
+      '</section>' +
+
+      '<section class="card cust-stats-card">' +
+        '<div class="cust-stats">' +
+          '<div class="cust-stat">' +
+            '<span>' + t('totalCredit') + '</span>' +
+            '<strong>' + money(totals.credit) + '</strong>' +
+          '</div>' +
+          '<div class="cust-stat">' +
+            '<span>' + t('paidLabel') + '</span>' +
+            '<strong class="advance">' + money(totals.paid) + '</strong>' +
+          '</div>' +
+          '<div class="cust-stat">' +
+            '<span>' + t('pendingLabel') + '</span>' +
+            '<strong class="' + balanceCls + '">' + money(balance) + '</strong>' +
+          '</div>' +
+        '</div>' +
+      '</section>' +
+
+      '<section class="card ledger-card" id="ledger">' +
+        '<div class="ledger-title">' +
+          '<h2>' + t('entries') + '</h2>' +
+          '<span class="muted">' + t('entriesCount', { n: entries.length }) + '</span>' +
+        '</div>' +
+        (entries.length
+          ? '<div class="ledger-head">' +
+              '<span>' + t('entries') + '</span>' +
+              '<span>' + t('youGave') + '</span>' +
+              '<span>' + t('youGot') + '</span>' +
+            '</div>' + ledgerRowsHtml(entries)
+          : '<p class="ledger-empty">' + t('noEntries') + '</p>') +
+      '</section>' +
+
+      '<section class="card" id="add-entry-card">' +
+        '<h2>' + t('addEntry') + '</h2>' +
+        '<form id="entryForm" novalidate>' +
+          '<div class="seg" role="radiogroup" aria-label="' + esc(t('addEntry')) + '">' +
             '<label class="seg-opt">' +
-              '<input type="radio" name="editType" value="credit"' + (entry.type === 'credit' ? ' checked' : '') + '>' +
+              '<input type="radio" name="type" value="credit" checked>' +
               '<span class="credit">' + t('credit') + '</span>' +
             '</label>' +
             '<label class="seg-opt">' +
-              '<input type="radio" name="editType" value="payment"' + (entry.type === 'payment' ? ' checked' : '') + '>' +
+              '<input type="radio" name="type" value="payment">' +
               '<span class="payment">' + t('payment') + '</span>' +
             '</label>' +
           '</div>' +
           '<div class="grid2">' +
             '<div class="field">' +
-              '<label>Amount (₹)</label>' +
-              '<input name="amount" type="number" inputmode="decimal" min="1" step="0.01" ' +
-                'value="' + esc(entry.amount) + '" required>' +
+              '<label for="entryAmount">' + t('amount') + '</label>' +
+              '<input id="entryAmount" name="amount" type="number" inputmode="decimal" min="1" step="0.01" ' +
+                'placeholder="0" required>' +
             '</div>' +
             '<div class="field">' +
-              '<label>' + t('date') + '</label>' +
-              '<input name="date" type="date" value="' + esc(entry.date) + '" required>' +
+              '<label for="entryDate">' + t('date') + '</label>' +
+              '<input id="entryDate" name="date" type="date" value="' + todayISO() + '" required>' +
             '</div>' +
           '</div>' +
           '<div class="field" style="margin-top:12px">' +
-            '<label>' + t('note') + ' <span class="optional">' + t('optional') + '</span></label>' +
-            '<input name="note" type="text" maxlength="140" value="' + esc(entry.note) + '">' +
+            '<label for="entryNote">' + t('note') + ' <span class="optional">' + t('optional') + '</span></label>' +
+            '<input id="entryNote" name="note" type="text" maxlength="140" ' +
+              'placeholder="' + esc(t('notePlaceholder')) + '">' +
           '</div>' +
-          '<p class="form-error" role="alert" hidden></p>' +
-          '<div class="btn-row">' +
-            '<button class="btn primary" type="submit">' + t('saveChanges') + '</button>' +
-            '<button class="btn ghost" type="button" data-cancel-edit="1">' + t('cancel') + '</button>' +
+          '<div class="field" style="margin-top:12px">' +
+            '<label for="shot-input">' + t('screenshot') + ' <span class="optional">' + t('optional') + '</span></label>' +
+            '<input id="shot-input" name="screenshot" type="file" accept="image/*">' +
+            '<p class="hint">' + esc(t('screenshotHint')) + '</p>' +
+            '<img class="shot-preview" id="shot-preview" alt="' + esc(t('screenshot')) + '" hidden>' +
+            '<p class="status" id="ocr-status" role="status" hidden></p>' +
           '</div>' +
+          '<p class="form-error" id="entryError" role="alert" hidden></p>' +
+          '<button class="btn primary wide" type="submit">' + t('addEntryBtn') + '</button>' +
         '</form>' +
-      '</article>'
-    );
-  }
+      '</section>' +
 
-  const isCredit = entry.type === 'credit';
-  const label = isCredit ? t('creditShort') : t('paymentShort');
-  const meta = formatDate(entry.date) +
-    (entry.note ? '<span class="dot">&middot;</span>' + esc(entry.note) : '');
-  const shot = entry.image
-    ? '<button type="button" class="shot-btn" data-shot="' + esc(entry.id) + '" ' +
-        'aria-label="' + esc(t('screenshot')) + '">' +
-        '<img data-shot="' + esc(entry.id) + '" src="' + entry.image + '" alt="' + esc(t('screenshot')) + '">' +
-      '</button>'
-    : '';
-
-  return (
-    '<article class="entry">' +
-      '<div class="entry-top">' +
-        '<span class="badge ' + entry.type + '">' + label + '</span>' +
-        '<span class="entry-amount ' + entry.type + '">' + money(entry.amount) + '</span>' +
+      '<div class="action-bar">' +
+        '<button type="button" class="action-btn gave" data-quick="credit">' +
+          '<span class="action-sign">\u2212</span>' + t('youGave') + '</button>' +
+        '<button type="button" class="action-btn got" data-quick="payment">' +
+          '<span class="action-sign">+</span>' + t('youGot') + '</button>' +
       '</div>' +
-      '<p class="entry-meta">' + meta + '</p>' +
-      shot +
-      entryActions(entry) +
-    '</article>'
-  );
-}
-
-function renderCustomer(customer) {
-  const balance = balanceFor(customer.phone);
-  const balanceCls = balance > 0 ? 'due' : balance < 0 ? 'advance' : 'zero';
-  const totals = customerTotals(customer.phone);
-  const entries = sortedEntries(customer.phone);
-
-  appEl.innerHTML =
-    '<a class="back" href="#/">' + t('back') + '</a>' +
-
-    '<section class="card cust-head">' +
-      '<div class="cust-id">' +
-        '<span class="avatar big" aria-hidden="true">' + esc(initials(customer.name)) + '</span>' +
-        '<div class="cust-name">' +
-          '<h1>' + esc(customer.name) + '</h1>' +
-          '<p class="muted">' + formatPhone(customer.phone) + '</p>' +
-        '</div>' +
-      '</div>' +
-      '<div class="cust-balance">' +
-        '<span class="eyebrow">' + t('balance') + '</span>' +
-        '<strong class="' + balanceCls + '">' + money(balance) + '</strong>' +
-      '</div>' +
-      '<a class="wa-btn solid" href="' + esc(waLink(customer)) + '" target="_blank" rel="noopener">' +
-        WA_ICON + '<span>' + t('whatsapp') + '</span>' +
-      '</a>' +
-      '<div class="cust-stats">' +
-        '<div class="cust-stat">' +
-          '<span>' + t('totalCredit') + '</span>' +
-          '<strong>' + money(totals.credit) + '</strong>' +
-        '</div>' +
-        '<div class="cust-stat">' +
-          '<span>' + t('paidLabel') + '</span>' +
-          '<strong class="advance">' + money(totals.paid) + '</strong>' +
-        '</div>' +
-        '<div class="cust-stat">' +
-          '<span>' + t('pendingLabel') + '</span>' +
-          '<strong class="' + balanceCls + '">' + money(balance) + '</strong>' +
-        '</div>' +
-      '</div>' +
-    '</section>' +
-
-    '<section class="card">' +
-      '<h2>' + t('addEntry') + '</h2>' +
-      '<form id="entryForm" novalidate>' +
-        '<div class="seg" role="radiogroup" aria-label="' + esc(t('addEntry')) + '">' +
-          '<label class="seg-opt">' +
-            '<input type="radio" name="type" value="credit" checked>' +
-            '<span class="credit">' + t('credit') + '</span>' +
-          '</label>' +
-          '<label class="seg-opt">' +
-            '<input type="radio" name="type" value="payment">' +
-            '<span class="payment">' + t('payment') + '</span>' +
-          '</label>' +
-        '</div>' +
-        '<div class="grid2">' +
-          '<div class="field">' +
-            '<label for="entryAmount">' + t('amount') + '</label>' +
-            '<input id="entryAmount" name="amount" type="number" inputmode="decimal" min="1" step="0.01" ' +
-              'placeholder="0" required>' +
-          '</div>' +
-          '<div class="field">' +
-            '<label for="entryDate">' + t('date') + '</label>' +
-            '<input id="entryDate" name="date" type="date" value="' + todayISO() + '" required>' +
-          '</div>' +
-        '</div>' +
-        '<div class="field" style="margin-top:12px">' +
-          '<label for="entryNote">' + t('note') + ' <span class="optional">' + t('optional') + '</span></label>' +
-          '<input id="entryNote" name="note" type="text" maxlength="140" ' +
-            'placeholder="' + esc(t('notePlaceholder')) + '">' +
-        '</div>' +
-        '<div class="field" style="margin-top:12px">' +
-          '<label for="shot-input">' + t('screenshot') + ' <span class="optional">' + t('optional') + '</span></label>' +
-          '<input id="shot-input" name="screenshot" type="file" accept="image/*">' +
-          '<p class="hint">' + esc(t('screenshotHint')) + '</p>' +
-          '<img class="shot-preview" id="shot-preview" alt="' + esc(t('screenshot')) + '" hidden>' +
-          '<p class="status" id="ocr-status" role="status" hidden></p>' +
-        '</div>' +
-        '<p class="form-error" id="entryError" role="alert" hidden></p>' +
-        '<button class="btn primary wide" type="submit">' + t('addEntryBtn') + '</button>' +
-      '</form>' +
-    '</section>' +
-
-    '<section class="card">' +
-      '<div class="list-head"><h2>' + t('entries') + ' <span class="count-pill">' + entries.length + '</span></h2></div>' +
-      (entries.length
-        ? '<div class="entries">' + entries.map(entryHtml).join('') + '</div>'
-        : '<p class="empty">' + t('noEntries') + '</p>') +
-    '</section>';
+    '</div>';
 
   const form = document.getElementById('entryForm');
   const screenshotInput = document.getElementById('shot-input');
@@ -1669,6 +1922,7 @@ function renderCustomer(customer) {
     });
   }
 }
+
 
 function addEntry(form, customer) {
   const errorEl = document.getElementById('entryError');
@@ -1750,7 +2004,69 @@ function saveEdit(form) {
 
 /* ---------------- one-time events ---------------- */
 
+function quickEntry(type) {
+  const form = document.getElementById('entryForm');
+  if (!form) return;
+  const radio = form.querySelector('input[name="type"][value="' + type + '"]');
+  if (radio) {
+    radio.checked = true;
+    radio.dispatchEvent(new Event('change', { bubbles: true }));
+  }
+  const card = document.getElementById('add-entry-card');
+  if (card) card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  setTimeout(function () {
+    const amount = form.elements.amount;
+    if (amount) amount.focus({ preventScroll: true });
+  }, 350);
+}
+
+function quickCashEntry(type) {
+  const form = document.getElementById('cashForm');
+  if (!form) return;
+  const radio = form.querySelector('input[name="cashType"][value="' + type + '"]');
+  if (radio) radio.checked = true;
+  const card = document.getElementById('cash-form-card');
+  if (card) card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  setTimeout(function () {
+    const amount = form.elements.amount;
+    if (amount) amount.focus({ preventScroll: true });
+  }, 350);
+}
+
+function quickAddCustomer() {
+  const form = document.getElementById('addCustomerForm');
+  if (!form) return;
+  form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  setTimeout(function () {
+    const name = document.getElementById('custName');
+    if (name) name.focus({ preventScroll: true });
+  }, 350);
+}
+
 appEl.addEventListener('click', function (event) {
+  const quick = event.target.closest('[data-quick]');
+  if (quick) {
+    quickEntry(quick.getAttribute('data-quick'));
+    return;
+  }
+
+  const quickCash = event.target.closest('[data-quick-cash]');
+  if (quickCash) {
+    quickCashEntry(quickCash.getAttribute('data-quick-cash'));
+    return;
+  }
+
+  if (event.target.closest('[data-quick-add-customer]')) {
+    quickAddCustomer();
+    return;
+  }
+
+  if (event.target.closest('[data-scroll-ledger]')) {
+    const ledger = document.getElementById('ledger');
+    if (ledger) ledger.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    return;
+  }
+
   const shot = event.target.closest('[data-shot]');
   if (shot) {
     const entry = state.entries.find(function (item) { return item.id === shot.getAttribute('data-shot'); });
@@ -1835,5 +2151,13 @@ window.addEventListener('hashchange', function () {
   pendingScreenshot = null;
   render();
 });
+
+if (mainTabs) {
+  mainTabs.querySelectorAll('[data-tab]').forEach(function (button) {
+    button.addEventListener('click', function () {
+      activateTab(button.getAttribute('data-tab'));
+    });
+  });
+}
 
 render();

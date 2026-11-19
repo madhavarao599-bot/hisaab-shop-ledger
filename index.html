@@ -4,14 +4,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Hisaab — a simple digital ledger for your shop.">
-<meta name="theme-color" content="#146c46">
+<meta name="theme-color" content="#0b4a9e">
 <title>Hisaab — shop ledger</title>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <header class="topbar">
   <div class="wrap topbar-inner">
-    <a class="brand" href="#/"><span class="brand-mark">₹</span>Hisaab</a>
+    <a class="brand" href="#/">
+      <span class="brand-mark">₹</span>
+      <span class="brand-name">Hisaab</span>
+    </a>
     <div class="topbar-right">
       <span class="shop-name" id="shopName"></span>
       <select class="lang-select" id="langSelect" aria-label="Language">
@@ -21,6 +24,12 @@
       </select>
     </div>
   </div>
+  <nav class="main-tabs" id="mainTabs" aria-label="Sections" hidden>
+    <div class="wrap main-tabs-inner">
+      <button type="button" class="main-tab active" data-tab="collection">Customers</button>
+      <button type="button" class="main-tab" data-tab="cashbook">Cashbook</button>
+    </div>
+  </nav>
 </header>
 
 <main class="wrap" id="app"></main>
